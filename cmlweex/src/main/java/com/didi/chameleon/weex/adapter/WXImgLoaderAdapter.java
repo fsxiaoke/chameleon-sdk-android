@@ -3,6 +3,7 @@ package com.didi.chameleon.weex.adapter;
 import android.widget.ImageView;
 
 import com.didi.chameleon.sdk.adapter.ICmlImgLoaderAdapter;
+import com.taobao.weex.WXSDKInstance;
 import com.taobao.weex.adapter.IWXImgLoaderAdapter;
 import com.taobao.weex.common.WXImageStrategy;
 import com.taobao.weex.dom.WXImageQuality;
@@ -18,8 +19,13 @@ public class WXImgLoaderAdapter implements IWXImgLoaderAdapter {
         this.imgLoaderAdapter = imgLoaderAdapter;
     }
 
+//    @Override
+//    public void setImage(String url, ImageView view, WXImageQuality quality, WXImageStrategy strategy) {
+//        this.imgLoaderAdapter.setImage(url, view);
+//    }
+
     @Override
-    public void setImage(String url, ImageView view, WXImageQuality quality, WXImageStrategy strategy) {
-        this.imgLoaderAdapter.setImage(url, view);
+    public void setImage(WXSDKInstance wxsdkInstance, String s, ImageView imageView, WXImageQuality wxImageQuality, WXImageStrategy wxImageStrategy) {
+        this.imgLoaderAdapter.setImage(s, imageView);
     }
 }
