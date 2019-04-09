@@ -7,10 +7,6 @@
             android:configChanges="orientation|screenSize|keyboard|mcc|mnc|locale|keyboardHidden|uiMode|fontScale"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
-        <intent-filter>
-            <action android:name="com.didi.chameleon.weex.action.WEEX"/>
-            <category android:name="android.intent.category.DEFAULT"/>
-        </intent-filter>
         </activity>
     </application>
 </manifest>
