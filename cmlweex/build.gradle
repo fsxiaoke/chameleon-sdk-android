@@ -90,11 +90,15 @@ dependencies {
     compileOnly 'com.squareup.okhttp3:okhttp:3.11.0' // 默认 web socket 框架
 
     if (Boolean.parseBoolean(PUBLISH)) {
-        compileOnly "com.didiglobal.chameleon:cmlsdk:$VERSION"
-//        compile "com.didiglobal.chameleon:rich-text:$VERSION"
-        compileOnly "com.didiglobal.chameleon:js-bundle-mgr:$VERSION"
+        implementation project(':cmlsdk')
+//        implementation project(':rich-text-component')
+        compileOnly project(':js-bundle-mgr')
+
+//        compileOnly "com.didiglobal.chameleon:cmlsdk:$VERSION"
+////        compile "com.didiglobal.chameleon:rich-text:$VERSION"
+//        compileOnly "com.didiglobal.chameleon:js-bundle-mgr:$VERSION"
     } else {
-        compileOnly project(':cmlsdk')
+        implementation project(':cmlsdk')
 //        implementation project(':rich-text-component')
         compileOnly project(':js-bundle-mgr')
     }
