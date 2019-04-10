@@ -19,7 +19,7 @@ public class CmlProtocolProcessor implements ICmlBridgeProtocol {
         String args = uri.getQueryParameter(KEY_ARGS);
         try {
             args = URLDecoder.decode(args, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         String callbackId = uri.getQueryParameter(KEY_CALLBACK_ID);
