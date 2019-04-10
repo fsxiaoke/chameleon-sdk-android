@@ -22,6 +22,7 @@ public class CmlJsBundleEngine implements CmlJsBundleManager {
     }
 
 
+    private CmlJsBundleManager  fsBundleManager;
     private volatile boolean isInit = false;
 
     private CmlJsBundleEngine() {
@@ -39,22 +40,38 @@ public class CmlJsBundleEngine implements CmlJsBundleManager {
      */
     @Override
     public void initConfig(Context context, CmlJsBundleMgrConfig cmlJsBundleMgrConfig) {
-        if (isInit) {
-            return;
+//        if (isInit) {
+//            return;
+//        }
+//        if (cmlJsBundleMgrConfig == null) {
+//            throw new NullPointerException("CmlJsBundleMgrConfig is null");
+//        }
+//        if (!CmlUtils.isMainThread()) {
+//            throw new RuntimeException("请在主线程初始化CmlJsBundleEngine");
+//        }
+//        CmlCodeManager.getInstance().init(context, cmlJsBundleMgrConfig);
+        try {
+            // engine 获取并初始化
+            Class cmlFsBundleManager = Class.forName("com.fxiaoke.fscommon.weex.bundle.cmlFsBundleManager");
+            if (null == cmlFsBundleManager) {
+                return;
+            }
+
+            fsBundleManager = (CmlJsBundleManager) cmlFsBundleManager.newInstance();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
         }
-        if (cmlJsBundleMgrConfig == null) {
-            throw new NullPointerException("CmlJsBundleMgrConfig is null");
-        }
-        if (!CmlUtils.isMainThread()) {
-            throw new RuntimeException("请在主线程初始化CmlJsBundleEngine");
-        }
-        CmlCodeManager.getInstance().init(context, cmlJsBundleMgrConfig);
         isInit = true;
     }
 
     @Override
     public void setPreloadList(List<CmlBundle> preloadList) {
-        CmlCodeManager.getInstance().setPreloadList(preloadList);
+//        CmlCodeManager.getInstance().setPreloadList(preloadList);
+        fsBundleManager.setPreloadList(preloadList);
     }
 
     /**
@@ -62,11 +79,12 @@ public class CmlJsBundleEngine implements CmlJsBundleManager {
      */
     @Override
     public void startPreload() {
-        if (!isInit) {
-            CmlLogUtils.e(TAG, "请先初始化CmlJsBundleEngine");
-            return;
-        }
-        CmlCodeManager.getInstance().startPreload();
+//        if (!isInit) {
+//            CmlLogUtils.e(TAG, "请先初始化CmlJsBundleEngine");
+//            return;
+//        }
+//        CmlCodeManager.getInstance().startPreload();
+        fsBundleManager.startPreload();
     }
 
     /**
@@ -77,10 +95,12 @@ public class CmlJsBundleEngine implements CmlJsBundleManager {
      */
     @Override
     public void getWXTemplate(String url, CmlGetCodeStringCallback cmlGetCodeStringCallback) {
-        if (!isInit) {
-            CmlLogUtils.e(TAG, "请先初始化CmlJsBundleEngine");
-            return;
-        }
-        CmlCodeManager.getInstance().getCode(url, cmlGetCodeStringCallback);
+//        if (!isInit) {
+//            CmlLogUtils.e(TAG, "请先初始化CmlJsBundleEngine");
+//            return;
+//        }
+//        CmlCodeManager.getInstance().getCode(url, cmlGetCodeStringCallback);
+        fsBundleManager.getWXTemplate(url, cmlGetCodeStringCallback);
+
     }
 }
