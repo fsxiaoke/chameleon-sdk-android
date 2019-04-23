@@ -232,7 +232,7 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
         }
 
         private Intent buildIntent(String instanceId) {
-            Intent intent = new Intent("com.didi.chameleon.weex.action.WEEX");
+            Intent intent = new Intent(activity,CmlWeexActivity.class);
             intent.putExtra(PARAM_URL, url);
             intent.putExtra(PARAM_REQUEST_CODE, requestCode);
             intent.putExtra(PARAM_INSTANCE_ID, instanceId);
