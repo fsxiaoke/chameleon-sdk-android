@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void weexdebug(){
-        String url = "http://172.28.3.158:8088/devtool_fake.html?_wx_devtool=ws://172.28.3.158:8088/debugProxy/native/b13572db-0217-4dd3-9479-29341976acf9";
+        String url = "http://172.28.3.158:8088/devtool_fake.html?_wx_devtool=ws://172.28.3.158:8088/debugProxy/native/f5f277c0-5b68-4f9c-a3f4-6d10f40796b1";
         Uri uri = Uri.parse(url);
         if (uri.getPath().contains("dynamic/replace")) {
 

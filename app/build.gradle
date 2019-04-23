@@ -38,15 +38,15 @@ dependencies {
     implementation "com.android.support:recyclerview-v7:$SUPPORT_VER"
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     implementation 'com.google.code.gson:gson:2.8.5'
-    implementation 'com.alibaba:fastjson:1.2.54'
+//    implementation 'com.alibaba:fastjson:1.2.54'
     implementation 'com.squareup.okhttp3:okhttp:3.11.0' // 默认 web socket 框架
     implementation 'com.github.bumptech.glide:glide:3.8.0'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-//    implementation "fs-android:weex_debug:1.0_c50b234:debug@aar"
-    implementation "com.taobao.android:weex_sdk:$WEEX_VER"
+    implementation "fs-android:weex_debug:1.0_c50b234:debug@aar"
+//    implementation "com.taobao.android:weex_sdk:$WEEX_VER"
     implementation project(':js-bundle-mgr')
     implementation project(':cmlsdk')
     implementation project(':cmlweex')
