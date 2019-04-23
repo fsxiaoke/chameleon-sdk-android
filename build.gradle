@@ -7,6 +7,8 @@ buildscript {
         maven {
             url 'https://maven.google.com/'
         }
+        maven {url "http://maven.firstshare.cn/artifactory/libs-release-local" }
+        maven { url "http://maven.firstshare.cn/artifactory/libs-snapshot-local" }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.1'
@@ -24,6 +26,8 @@ allprojects {
             // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
             url "$rootDir/node_modules/react-native/android"
         }
+        maven {url "http://maven.firstshare.cn/artifactory/libs-release-local" }
+        maven { url "http://maven.firstshare.cn/artifactory/libs-snapshot-local" }
     }
 }
 configurations.all {

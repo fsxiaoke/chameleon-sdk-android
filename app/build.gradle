@@ -53,6 +53,15 @@ dependencies {
     implementation "com.didiglobal.chameleon:sdk-image:$VERSION"
     implementation "com.didiglobal.chameleon:sdk-location:$VERSION"
 
+    debugImplementation 'com.taobao.android.weex_inspection:protocol:1.1.4.1'
+    debugImplementation 'com.taobao.android:weex_inspector:0.18.10'
+    debugImplementation ('com.squareup.okhttp:okhttp:2.3.0'){
+        exclude module: 'okio'
+    }
+    debugImplementation ('com.squareup.okhttp:okhttp-ws:2.3.0'){
+        exclude module: 'okio'
+    }
+
     //SNAPSHOT版本的缓存有效时间为0秒，每次同步时都尝试更新
     configurations.all {
         resolutionStrategy.cacheChangingModulesFor 0, 'seconds'

@@ -1,6 +1,7 @@
 package com.didi.chameleon.weex.container;
 
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -231,7 +232,7 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
         }
 
         private Intent buildIntent(String instanceId) {
-            Intent intent = new Intent(activity, CmlWeexActivity.class);
+            Intent intent = new Intent("com.didi.chameleon.weex.action.WEEX");
             intent.putExtra(PARAM_URL, url);
             intent.putExtra(PARAM_REQUEST_CODE, requestCode);
             intent.putExtra(PARAM_INSTANCE_ID, instanceId);
@@ -246,6 +247,20 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
         public void launch() {
             final String instanceId = CmlEngine.getInstance().generateInstanceId();
             activity.startActivity(buildIntent(instanceId));
+        }
+
+        public Intent buildIntent(){
+            String instanceId = CmlEngine.getInstance().generateInstanceId();
+            Intent intent = new Intent("com.didi.chameleon.weex.action.WEEX");
+            intent.putExtra(PARAM_URL, url);
+            intent.putExtra(PARAM_REQUEST_CODE, requestCode);
+            intent.putExtra(PARAM_INSTANCE_ID, instanceId);
+            if (options != null) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(PARAM_OPTIONS, options);
+                intent.putExtras(bundle);
+            }
+            return intent;
         }
 
         public void launchForResult() {

@@ -22,6 +22,7 @@ public class CmlJsBundleEngine implements CmlJsBundleManager {
     }
 
 
+    private CmlJsBundleManager  fsBundleManager;
     private volatile boolean isInit = false;
 
     private CmlJsBundleEngine() {
@@ -49,12 +50,28 @@ public class CmlJsBundleEngine implements CmlJsBundleManager {
             throw new RuntimeException("请在主线程初始化CmlJsBundleEngine");
         }
         CmlCodeManager.getInstance().init(context, cmlJsBundleMgrConfig);
+        try {
+            // engine 获取并初始化
+            Class cmlFsBundleManager = Class.forName("com.fxiaoke.fscommon.weex.bundle.cmlFsBundleManager");
+            if (null == cmlFsBundleManager) {
+                return;
+            }
+
+            fsBundleManager = (CmlJsBundleManager) cmlFsBundleManager.newInstance();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        }
         isInit = true;
     }
 
     @Override
     public void setPreloadList(List<CmlBundle> preloadList) {
         CmlCodeManager.getInstance().setPreloadList(preloadList);
+        fsBundleManager.setPreloadList(preloadList);
     }
 
     /**
@@ -67,6 +84,7 @@ public class CmlJsBundleEngine implements CmlJsBundleManager {
             return;
         }
         CmlCodeManager.getInstance().startPreload();
+        fsBundleManager.startPreload();
     }
 
     /**
@@ -81,6 +99,13 @@ public class CmlJsBundleEngine implements CmlJsBundleManager {
             CmlLogUtils.e(TAG, "请先初始化CmlJsBundleEngine");
             return;
         }
-        CmlCodeManager.getInstance().getCode(url, cmlGetCodeStringCallback);
+
+        if(url.startsWith("http://")){
+            CmlCodeManager.getInstance().getCode(url, cmlGetCodeStringCallback);
+        }else {
+            fsBundleManager.getWXTemplate(url, cmlGetCodeStringCallback);
+        }
+
+
     }
 }
