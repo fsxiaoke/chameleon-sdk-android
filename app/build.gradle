@@ -48,6 +48,7 @@ dependencies {
     implementation "fs-android:weex_debug:1.0_c50b234:debug@aar"
 //    implementation "com.taobao.android:weex_sdk:$WEEX_VER"
     implementation project(':js-bundle-mgr')
+    implementation project(':cmlweb')
     implementation project(':cmlsdk')
     implementation project(':cmlweex')
 //    implementation "com.didiglobal.chameleon:cmlsdk:$VERSION"
