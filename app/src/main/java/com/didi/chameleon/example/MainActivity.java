@@ -17,7 +17,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     // 演示打开一般的URL
     private static final String URL_NORMAL = "https://www.didiglobal.com";
     // 这是一个可以正常打开的 JS_BUNDLE
-    private static final String URL_JS_BUNDLE_OK = "https://static.didialift.com/pinche/gift/chameleon-ui-builtin/web/chameleon-ui-builtin.html?cml_addr=https%3A%2F%2Fstatic.didialift.com%2Fpinche%2Fgift%2Fchameleon-ui-builtin%2Fweex%2Fchameleon-ui-builtin.js";
+//    private static final String URL_JS_BUNDLE_OK = "https://static.didialift.com/pinche/gift/chameleon-ui-builtin/web/chameleon-ui-builtin.html?cml_addr=https%3A%2F%2Fstatic.didialift.com%2Fpinche%2Fgift%2Fchameleon-ui-builtin%2Fweex%2Fchameleon-ui-builtin.js";
+    private static final String URL_JS_BUNDLE_OK = "https://static.didialift.com/pinche/gift/chameleon-ui-builtin/web/chameleon-ui-builtin.html?cml_addr=http%3a%2f%2f172.28.3.158%3a8001%2fweex%2ftest.js%3fpath%3d%252Fpages%252Findex%252Findex";
     // 这是一个错误的 JS_BUNDLE
     private static final String URL_JS_BUNDLE_ERR = "https://www.didiglobal.com?cml_addr=xxx.js";
     // 这是一个测试预加载的 JS_BUNDLE
