@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     // 演示打开一般的URL
     private static final String URL_NORMAL = "https://www.didiglobal.com";
     // 这是一个可以正常打开的 JS_BUNDLE
-    private static final String URL_JS_BUNDLE_OK = "http://172.29.1.198:8001/cml/h5/index?wx_addr=http%3A%2F%2F172.29.1.198%3A8001%2Fweex%2Fzds.js%3Ft%3D1556005643004&path=%2Fpages%2Findex%2Findex";
+    private static final String URL_JS_BUNDLE_OK = "http://172.28.3.158:8001/cml/h5/index?wx_addr=http%3A%2F%2F172.28.3.158%3A8001%2Fweex%2Ffs_demo.js%3Ft%3D1556015347316&amp;path=%2Fpages%2Findex%2Findex";
     // 这是一个错误的 JS_BUNDLE
     private static final String URL_JS_BUNDLE_ERR = "https://www.didiglobal.com?cml_addr=xxx.js";
     // 这是一个测试预加载的 JS_BUNDLE
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void weexdebug(){
-        String url = "http://172.29.1.198:8089/devtool_fake.html?_wx_devtool=ws://172.29.1.198:8089/debugProxy/native/9bdb4854-4c9c-45ea-a7fa-fdbc76da8a1c";
+        String url = "http://172.28.3.158:8088/devtool_fake.html?_wx_devtool=ws://172.28.3.158:8088/debugProxy/native/b13572db-0217-4dd3-9479-29341976acf9";
         Uri uri = Uri.parse(url);
         if (uri.getPath().contains("dynamic/replace")) {
 

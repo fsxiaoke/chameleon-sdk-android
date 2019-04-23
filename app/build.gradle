@@ -45,10 +45,14 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-
-    implementation "com.didiglobal.chameleon:cmlsdk:$VERSION"
-    implementation "com.didiglobal.chameleon:cmlweex:$VERSION"
-    implementation "com.didiglobal.chameleon:cmlweb:$VERSION"
+//    implementation "fs-android:weex_debug:1.0_c50b234:debug@aar"
+    implementation "com.taobao.android:weex_sdk:$WEEX_VER"
+    implementation project(':js-bundle-mgr')
+    implementation project(':cmlsdk')
+    implementation project(':cmlweex')
+//    implementation "com.didiglobal.chameleon:cmlsdk:$VERSION"
+//    implementation "com.didiglobal.chameleon:cmlweex:$VERSION"
+//    implementation "com.didiglobal.chameleon:cmlweb:$VERSION"
     implementation "com.didiglobal.chameleon:rich-text-component:$VERSION"
     implementation "com.didiglobal.chameleon:sdk-image:$VERSION"
     implementation "com.didiglobal.chameleon:sdk-location:$VERSION"

@@ -71,7 +71,7 @@ public class CmlJsBundleEngine implements CmlJsBundleManager {
     @Override
     public void setPreloadList(List<CmlBundle> preloadList) {
         CmlCodeManager.getInstance().setPreloadList(preloadList);
-        fsBundleManager.setPreloadList(preloadList);
+//        fsBundleManager.setPreloadList(preloadList);
     }
 
     /**
@@ -84,7 +84,7 @@ public class CmlJsBundleEngine implements CmlJsBundleManager {
             return;
         }
         CmlCodeManager.getInstance().startPreload();
-        fsBundleManager.startPreload();
+//        fsBundleManager.startPreload();
     }
 
     /**
@@ -103,7 +103,7 @@ public class CmlJsBundleEngine implements CmlJsBundleManager {
         if(url.startsWith("http://")){
             CmlCodeManager.getInstance().getCode(url, cmlGetCodeStringCallback);
         }else {
-            fsBundleManager.getWXTemplate(url, cmlGetCodeStringCallback);
+//            fsBundleManager.getWXTemplate(url, cmlGetCodeStringCallback);
         }
 
 

@@ -25,7 +25,7 @@ public class WXImgLoaderAdapter implements IWXImgLoaderAdapter {
 //    }
 
     @Override
-    public void setImage(WXSDKInstance wxsdkInstance, String s, ImageView imageView, WXImageQuality wxImageQuality, WXImageStrategy wxImageStrategy) {
+    public void setImage(String s, ImageView imageView, WXImageQuality wxImageQuality, WXImageStrategy wxImageStrategy) {
         this.imgLoaderAdapter.setImage(s, imageView);
     }
 }

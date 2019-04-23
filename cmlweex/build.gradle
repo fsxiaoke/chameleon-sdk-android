@@ -82,10 +82,10 @@ dependencies {
     compileOnly "com.alibaba:fastjson:$FAST_JSON_VER"
 
     testImplementation 'junit:junit:4.12'
-//    compileOnly "com.taobao.android:weex_sdk:$WEEX_VER"
+    compileOnly "com.taobao.android:weex_sdk:$WEEX_VER"
 
-//    compileOnly "fs-android:weex_debug:1.0_c50b234:debug@aar"
-    compileOnly(group: 'fs-android', name: 'weex_debug', version: '1.0_c50b234', ext: 'aar')
+//    implementation "fs-android:weex_debug:1.0_c50b234:debug@aar"
+//    implementation(group: 'fs-android', name: 'weex_debug', version: '1.0_c50b234', ext: 'aar')
 
     compileOnly 'com.squareup.okhttp3:okhttp:3.11.0' // 默认 web socket 框架
 
