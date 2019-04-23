@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
+import com.alibaba.fastjson.JSON;
 import com.didi.chameleon.sdk.CmlEnvironment;
 import com.didi.chameleon.sdk.common.CmlThreadCenter;
 import com.didi.chameleon.sdk.utils.CmlLogUtil;
@@ -202,33 +203,35 @@ public class CmlModuleInvoke {
 
     @Nullable
     public String wrapperParam(@Nullable Object object) {
-        if (object == null) {
-            return null;
-        }
-        if (object instanceof String) {
-            return (String) object;
-        } else if (object instanceof JSONObject) {
-            return object.toString();
-        } else if (object instanceof Map) {
-            JSONObject jsonObject = new JSONObject();
-            for (Object key : ((Map) object).keySet()) {
-                try {
-                    jsonObject.put(String.valueOf(key), ((Map) object).get(key));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-            return wrapperParam(jsonObject);
-        } else if (object.getClass() == int.class
-                || object.getClass() == double.class
-                || object.getClass() == boolean.class) {
-            return String.valueOf(object);
-        } else {
-            return CmlEnvironment.getJsonWrapper().toJson(object);
-        }
+        return JSON.toJSONString(object); //xiongtj  
+//        if (object == null) {
+//            return null;
+//        }
+//        if (object instanceof String) {
+//            return (String) object;
+//        } else if (object instanceof JSONObject) {
+//            return object.toString();
+//        } else if (object instanceof Map) {
+//            JSONObject jsonObject = new JSONObject();
+//            for (Object key : ((Map) object).keySet()) {
+//                try {
+//                    jsonObject.put(String.valueOf(key), ((Map) object).get(key));
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//            return wrapperParam(jsonObject);
+//        } else if (object.getClass() == int.class
+//                || object.getClass() == double.class
+//                || object.getClass() == boolean.class) {
+//            return String.valueOf(object);
+//        } else {
+//            return CmlEnvironment.getJsonWrapper().toJson(object);
+//        }
     }
 
     public String wrapperCallback(CmlCallbackModel model) throws Exception {
+
         String param = wrapperParam(model.data);
         if (!TextUtils.isEmpty(param)) {
             param = URLEncoder.encode(param, "UTF-8");
