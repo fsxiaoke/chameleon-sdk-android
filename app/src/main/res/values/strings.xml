@@ -4,4 +4,6 @@
     <string name="demo_degrade">降级演示</string>
     <string name="demo_extend_module">CmlSDKExample</string>
     <string name="demo_js_bundle">CmlSDKExample</string>
+    <string name="preferences_history_summary">自动将条码存入历史记录</string>
+    <string name="preferences_history_title">存入历史记录</string>
 </resources>

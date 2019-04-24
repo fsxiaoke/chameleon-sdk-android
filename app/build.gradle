@@ -10,7 +10,14 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-
+    sourceSets {
+        main {
+            jniLibs.srcDir(['libs'])
+            java {
+                srcDirs = ["src/main/java", "src/main/java_zxing"]
+            }
+        }
+    }
     signingConfigs {
         release {
             storeFile file("../chameleon.keystore")
