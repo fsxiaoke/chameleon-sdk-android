@@ -203,7 +203,10 @@ public class CmlModuleInvoke {
 
     @Nullable
     public String wrapperParam(@Nullable Object object) {
-        return JSON.toJSONString(object); //xiongtj  
+        if (object instanceof JSONObject){
+            return ((JSONObject) object).toString();
+        }
+        return JSON.toJSONString(object); //xiongtj
 //        if (object == null) {
 //            return null;
 //        }
