@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import com.didi.chameleon.sdk.bundle.CmlBundle;
 import com.didi.chameleon.sdk.extend.CmlClipboardModule;
 import com.didi.chameleon.sdk.extend.CmlCommonModule;
+import com.didi.chameleon.sdk.extend.CmlFsEnvModule;
 import com.didi.chameleon.sdk.extend.CmlModalModule;
 import com.didi.chameleon.sdk.extend.CmlStorageModule;
 import com.didi.chameleon.sdk.extend.CmlStreamModule;
@@ -147,7 +148,7 @@ public class CmlEngine {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
-
+        registerModule(CmlFsEnvModule.class);
         registerModule(CmlCommonModule.class);
         registerModule(CmlClipboardModule.class);
         registerModule(CmlStorageModule.class);

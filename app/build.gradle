@@ -66,6 +66,7 @@ dependencies {
     implementation "com.didiglobal.chameleon:sdk-location:$VERSION"
 
     debugImplementation 'com.taobao.android.weex_inspection:protocol:1.1.4.1'
+    debugImplementation 'com.taobao.android.weex_inspection:urlconnection_interceptor:1.0.0'
     debugImplementation 'com.taobao.android:weex_inspector:0.18.10'
     debugImplementation ('com.squareup.okhttp:okhttp:2.3.0'){
         exclude module: 'okio'

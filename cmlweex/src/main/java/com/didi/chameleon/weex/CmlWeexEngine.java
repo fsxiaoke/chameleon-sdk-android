@@ -30,6 +30,7 @@ import com.didi.chameleon.weex.jsbundlemgr.CmlJsBundleManager;
 import com.didi.chameleon.weex.jsbundlemgr.CmlJsBundleMgrConfig;
 import com.didi.chameleon.weex.jsbundlemgr.code.CmlGetCodeStringCallback;
 import com.didi.chameleon.weex.module.CmlNavigatorModule;
+import com.didi.chameleon.weex.module.I18NModule;
 import com.taobao.weex.InitConfig;
 import com.taobao.weex.WXSDKEngine;
 import com.taobao.weex.common.WXException;
@@ -105,12 +106,13 @@ public class CmlWeexEngine implements ICmlEngine {
         builder.setImgAdapter(new WXImgLoaderAdapter(CmlEnvironment.getImgLoaderAdapter()));
         builder.setJSExceptionAdapter(new WxJsExceptionAdapter(this.cmlJSExceptionAdapter));
         WXSDKEngine.initialize((Application) context.getApplicationContext(), builder.build());
-//        try {
-//            WXSDKEngine.registerModule(ICmlBridgeProtocol.CML_BRIDGE, CmlWeexBridgeJsToNative.class, false);
-//            WXSDKEngine.registerModule(ICmlNavigatorAdapter.KEY, CmlNavigatorModule.class, false);
-//        } catch (WXException e) {
-//            CmlLogUtil.d(TAG, "register weex bridge module error.");
-//        }
+        try {
+            WXSDKEngine.registerModule(ICmlBridgeProtocol.CML_BRIDGE, CmlWeexBridgeJsToNative.class, false);
+            WXSDKEngine.registerModule(ICmlNavigatorAdapter.KEY, CmlNavigatorModule.class, false);
+            WXSDKEngine.registerModule("I18NModule", I18NModule.class, false);
+        } catch (WXException e) {
+            CmlLogUtil.d(TAG, "register weex bridge module error.");
+        }
     }
 
     @Override
