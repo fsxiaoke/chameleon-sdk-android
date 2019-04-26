@@ -203,6 +203,9 @@ public class CmlModuleInvoke {
 
     @Nullable
     public String wrapperParam(@Nullable Object object) {
+        if(object instanceof org.json.JSONObject||object instanceof org.json.JSONArray){
+            return object.toString();
+        }
         return JSON.toJSONString(object); //xiongtj  
 //        if (object == null) {
 //            return null;
