@@ -6,3 +6,7 @@
 /build
 /captures
 .externalNativeBuild
+/buildSrc/build/classes/groovy/main/FileUtil.class
+/buildSrc/build/classes/groovy/main/GetlocalIP.class
+/buildSrc/build/libs/buildSrc.jar
+/buildSrc/build/tmp/jar/MANIFEST.MF
