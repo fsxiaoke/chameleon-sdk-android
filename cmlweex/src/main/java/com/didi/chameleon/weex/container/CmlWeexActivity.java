@@ -97,8 +97,8 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
 
     @Override
     public void onRenderSuccess() {
-        loadingView.setVisibility(View.GONE);
-        titleView.setVisibility(View.GONE);
+//        loadingView.setVisibility(View.GONE);
+//        titleView.setVisibility(View.GONE);
     }
 
     @Override
@@ -146,6 +146,8 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
     public void onViewCreate(View view) {
         objectView = view;
         viewContainer.addView(view);
+        loadingView.setVisibility(View.GONE);
+        titleView.setVisibility(View.GONE);
     }
 
     @Override
