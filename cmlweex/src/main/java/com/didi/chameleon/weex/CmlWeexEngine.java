@@ -101,16 +101,16 @@ public class CmlWeexEngine implements ICmlEngine {
     private void initWeex(Context context) {
         CmlLogUtil.d(TAG, "init cml weex engine");
 
-        InitConfig.Builder builder = new InitConfig.Builder();
+//        InitConfig.Builder builder = new InitConfig.Builder();
 //        builder.setImgAdapter(new WXImgLoaderAdapter(CmlEnvironment.getImgLoaderAdapter()));
-        builder.setJSExceptionAdapter(new WxJsExceptionAdapter(this.cmlJSExceptionAdapter));
+//        builder.setJSExceptionAdapter(new WxJsExceptionAdapter(this.cmlJSExceptionAdapter));
 //        WXSDKEngine.initialize((Application) context.getApplicationContext(), builder.build());
-        try {
-            WXSDKEngine.registerModule(ICmlBridgeProtocol.CML_BRIDGE, CmlWeexBridgeJsToNative.class, false);
-            WXSDKEngine.registerModule(ICmlNavigatorAdapter.KEY, CmlNavigatorModule.class, false);
-        } catch (WXException e) {
-            CmlLogUtil.d(TAG, "register weex bridge module error.");
-        }
+//        try {
+//            WXSDKEngine.registerModule(ICmlBridgeProtocol.CML_BRIDGE, CmlWeexBridgeJsToNative.class, false);
+//            WXSDKEngine.registerModule(ICmlNavigatorAdapter.KEY, CmlNavigatorModule.class, false);
+//        } catch (WXException e) {
+//            CmlLogUtil.d(TAG, "register weex bridge module error.");
+//        }
     }
 
     @Override
