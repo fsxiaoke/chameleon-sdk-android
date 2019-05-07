@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.alibaba.fastjson.JSON;
 import com.didi.chameleon.sdk.CmlEngine;
 import com.didi.chameleon.sdk.CmlEnvironment;
 import com.didi.chameleon.sdk.CmlInstanceManage;
@@ -25,6 +26,7 @@ import com.didi.chameleon.weex.CmlWeexInstance;
 import com.didi.chameleon.weex.R;
 
 import java.util.HashMap;
+import java.util.Set;
 
 /**
  * 用来展示 Chameleon Weex 页面，通过{@link Launch} 或者{@link CmlWeexEngine#launchPage(Activity, String, HashMap)}进行启动
@@ -126,6 +128,23 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode,resultCode,data);
+        if (mWXInstance != null) {
+            mWXInstance.onResult(resultCode,bundleToJsonString(data.getExtras()));
+        }
+    }
+
+    private String bundleToJsonString(Bundle bundle){
+        Set<String> keySet = bundle.keySet();  //获取所有的Key,
+        HashMap<String,Object> querymap = new HashMap();
+        for(String key : keySet){  //bundle.get(key);来获取对应的value
+            querymap.put(key,bundle.get(key));
+        }
+        return JSON.toJSONString(querymap);
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         mIsViewValid = false;
@@ -133,6 +152,8 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
             mWXInstance.onDestroy();
         }
     }
+
+
 
     @Override
     public void onDegradeToH5(String url, int degradeCode) {
