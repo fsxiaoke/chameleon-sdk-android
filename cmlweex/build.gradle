@@ -98,6 +98,7 @@ dependencies {
 //        compileOnly "com.didiglobal.chameleon:js-bundle-mgr:$VERSION"
     } else {
         implementation project(':cmlsdk')
+
 //        implementation project(':rich-text-component')
         compileOnly project(':js-bundle-mgr')
     }

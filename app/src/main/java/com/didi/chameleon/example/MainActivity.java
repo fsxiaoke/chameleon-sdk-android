@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     // 演示打开一般的URL
     private static final String URL_NORMAL = "https://www.didiglobal.com";
     // 这是一个可以正常打开的 JS_BUNDLE
-    private static final String URL_JS_BUNDLE_OK = "http://172.29.1.198:8001/cml/h5/index?wx_addr=http%3A%2F%2F172.29.1.198%3A8001%2Fweex%2Fzds.js%3Ft%3D1556005643004&path=%2Fpages%2Findex%2Findex";
+    private static final String URL_JS_BUNDLE_OK = "http://172.29.1.198:8001/cml/h5/index?wx_addr=http%3A%2F%2F172.29.1.198%3A8001%2Fweex%2Fcmldemo.js%3Ft%3D1557313496904&path=%2Fpages%2Findex%2Findex";
     // 这是一个错误的 JS_BUNDLE
     private static final String URL_JS_BUNDLE_ERR = "https://www.didiglobal.com?cml_addr=xxx.js";
     // 这是一个测试预加载的 JS_BUNDLE

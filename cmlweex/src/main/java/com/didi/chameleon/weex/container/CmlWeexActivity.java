@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -40,6 +41,7 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
     private CmlTitleView titleView;
     private View objectView;
     private ViewGroup viewContainer;
+    private View refreshView;
     /*
      * 判断view是否有效，我们认为View在onCreate~onDestroy之间为有效
      */
@@ -58,6 +60,7 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
         setContentView(R.layout.cml_container_activity);
         initView();
 
+
         sdcardPermissionCheck(this);
     }
 
@@ -71,6 +74,24 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
                 onBackPressed();
             }
         });
+
+        refreshView = findViewById(R.id.refresh_btn);
+        refreshView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = getIntent();
+                String url = intent.getStringExtra(PARAM_URL);
+                if (TextUtils.isEmpty(url)) {
+                    CmlLogUtil.e(TAG, "url cant be null !");
+                    return;
+                }
+                mWXInstance.reload(url);
+            }
+        });
+    }
+
+    protected  View getRefreshView(){
+        return refreshView;
     }
 
     @Override
@@ -233,8 +254,16 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
             return this;
         }
 
+        private Intent getIntent(){
+            if(activity.getApplication().getApplicationInfo().packageName.equals("com.didi.chameleon.example")){
+                return new Intent(activity, CmlWeexActivity.class);
+            }else{
+                return new Intent("com.didi.chameleon.weex.action.WEEX");
+            }
+        }
+
         private Intent buildIntent(String instanceId) {
-            Intent intent = new Intent("com.didi.chameleon.weex.action.WEEX");
+            Intent intent = getIntent();
             intent.putExtra(PARAM_URL, url);
             intent.putExtra(PARAM_REQUEST_CODE, requestCode);
             intent.putExtra(PARAM_INSTANCE_ID, instanceId);
@@ -253,7 +282,7 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
 
         public Intent buildIntent(){
             String instanceId = CmlEngine.getInstance().generateInstanceId();
-            Intent intent = new Intent("com.didi.chameleon.weex.action.WEEX");
+            Intent intent = getIntent();
             intent.putExtra(PARAM_URL, url);
             intent.putExtra(PARAM_REQUEST_CODE, requestCode);
             intent.putExtra(PARAM_INSTANCE_ID, instanceId);

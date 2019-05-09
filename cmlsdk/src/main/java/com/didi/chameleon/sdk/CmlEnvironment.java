@@ -42,7 +42,7 @@ public class CmlEnvironment {
     /**
      * 是否开启缓存。前端调试的时候需要关闭缓存
      */
-    public static boolean CML_ALLOW_BUNDLE_CACHE = true;
+    public static boolean CML_ALLOW_BUNDLE_CACHE = false;
 
     /**
      * 是否输出分析日志
