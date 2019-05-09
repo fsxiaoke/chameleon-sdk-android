@@ -116,7 +116,7 @@ public class CmlHttpClient {
 
         int nRead;
         int readCount = 0;
-        byte[] data = new byte[2048];
+        byte[] data = new byte[16384];
 
         while ((nRead = inputStream.read(data, 0, data.length)) != -1) {
             buffer.write(data, 0, nRead);

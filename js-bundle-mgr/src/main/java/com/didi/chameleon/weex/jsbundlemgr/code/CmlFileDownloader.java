@@ -69,7 +69,7 @@ public class CmlFileDownloader {
                     @Override
                     public void onHttpFinish(CmlResponse response) {
                         if (response != null) {
-                            CmlLogUtils.d("CmlFileDownloader", "response：" + response.toString());
+                            CmlLogUtils.d("CmlFileDownloader", "response： ok" );
                             if (response.data != null && TextUtils.equals("200", response.statusCode)) {
                                 String template = new String(response.data);
                                 if (TextUtils.isEmpty(template)) {
