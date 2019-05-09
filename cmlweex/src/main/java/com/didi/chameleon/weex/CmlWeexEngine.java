@@ -103,24 +103,19 @@ public class CmlWeexEngine implements ICmlEngine {
     private void initWeex(Context context) {
         CmlLogUtil.d(TAG, "init cml weex engine");
 
-        InitConfig.Builder builder = new InitConfig.Builder();
-        if(context.getApplicationInfo().packageName.equals("com.didi.chameleon.example")){
+        if(context.getApplicationInfo().packageName.equals("com.didi.chameleon.example")) {
+            InitConfig.Builder builder = new InitConfig.Builder();
             builder.setImgAdapter(new WXImgLoaderAdapter(CmlEnvironment.getImgLoaderAdapter()));
-        }
-        builder.setJSExceptionAdapter(new WxJsExceptionAdapter(this.cmlJSExceptionAdapter));
-        if(context.getApplicationInfo().packageName.equals("com.didi.chameleon.example")){
+            builder.setJSExceptionAdapter(new WxJsExceptionAdapter(this.cmlJSExceptionAdapter));
             WXSDKEngine.initialize((Application) context.getApplicationContext(), builder.build());
-        }
 
-        try {
-            WXSDKEngine.registerModule(ICmlBridgeProtocol.CML_BRIDGE, CmlWeexBridgeJsToNative.class, false);
-            WXSDKEngine.registerModule(ICmlNavigatorAdapter.KEY, CmlNavigatorModule.class, false);
+            try {
+                WXSDKEngine.registerModule(ICmlBridgeProtocol.CML_BRIDGE, CmlWeexBridgeJsToNative.class, false);
+                WXSDKEngine.registerModule(ICmlNavigatorAdapter.KEY, CmlNavigatorModule.class, false);
 
-        } catch (WXException e) {
-            CmlLogUtil.d(TAG, "register weex bridge module error.");
-        }
-
-        if(context.getApplicationInfo().packageName.equals("com.didi.chameleon.example")){
+            } catch (WXException e) {
+                CmlLogUtil.d(TAG, "register weex bridge module error.");
+            }
             CmlModuleManager.getInstance().addCmlModule(CmlFsEnvModule.class);
         }
     }

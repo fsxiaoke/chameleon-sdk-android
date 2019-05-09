@@ -416,6 +416,8 @@ public class CmlWeexInstance implements ICmlActivityInstance, ICmlBaseLifecycle,
 
     @Override
     public void setPageResult(int resultCode, Intent data) {
+
+        mCmlActivity.setPageResult(resultCode,data);
         // do nothing
     }
 

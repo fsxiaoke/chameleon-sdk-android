@@ -129,6 +129,20 @@ public class CmlDiskLruCache implements CmlDiskCache {
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
+        } finally {
+            try {
+                if (out != null) {
+                    out.close();
+                }
+                if (in != null) {
+                    in.close();
+                }
+                if (outputStream != null) {
+                    outputStream.close();
+                }
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
         }
         return saveSuccess;
     }
