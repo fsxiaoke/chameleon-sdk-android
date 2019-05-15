@@ -40,6 +40,8 @@ public class CmlCommonModule {
 
     @CmlMethod(alias = "closePage")
     public void closePage(ICmlInstance instance) {
+        CmlModuleManager.getInstance().invokeWeb(instance.getInstanceId(),
+                "globalEventModule", "onBeforeClose", "{}", null);
         instance.finishSelf();
     }
 
