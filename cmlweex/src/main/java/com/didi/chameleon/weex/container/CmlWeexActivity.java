@@ -37,7 +37,7 @@ import java.util.Set;
  */
 public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInstance.ICmlInstanceListener, ICmlActivity {
     private static final String TAG = "CmlWeexActivity";
-    private CmlWeexInstance mWXInstance;
+    protected CmlWeexInstance mWXInstance;
 
     private View loadingView;
     private CmlTitleView titleView;
@@ -124,6 +124,7 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
 //        titleView.setVisibility(View.GONE);
     }
 
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -148,27 +149,6 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
         }
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode,resultCode,data);
-        if (mWXInstance != null) {
-            mWXInstance.onResult(resultCode,bundleToJsonString(data));
-        }
-    }
-
-    private String bundleToJsonString(Intent data){
-        if(data!=null){
-            Bundle bundle = data.getExtras();
-            Set<String> keySet = bundle.keySet();  //获取所有的Key,
-            HashMap<String,Object> querymap = new HashMap();
-            for(String key : keySet){  //bundle.get(key);来获取对应的value
-                querymap.put(key,bundle.get(key));
-            }
-            return JSON.toJSONString(querymap);
-        }
-        return "{}";
-
-    }
 
     @Override
     protected void onDestroy() {
