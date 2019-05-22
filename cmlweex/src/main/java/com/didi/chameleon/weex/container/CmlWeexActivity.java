@@ -352,7 +352,7 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
                     }
                 });
             }
-            activity.startActivity(buildIntent(instanceId));
+            activity.startActivityForResult(buildIntent(instanceId),requestCode);
         }
     }
 }
