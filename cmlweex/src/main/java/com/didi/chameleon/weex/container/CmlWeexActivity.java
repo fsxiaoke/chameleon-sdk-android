@@ -152,17 +152,22 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode,resultCode,data);
         if (mWXInstance != null) {
-            mWXInstance.onResult(resultCode,bundleToJsonString(data.getExtras()));
+            mWXInstance.onResult(resultCode,bundleToJsonString(data));
         }
     }
 
-    private String bundleToJsonString(Bundle bundle){
-        Set<String> keySet = bundle.keySet();  //获取所有的Key,
-        HashMap<String,Object> querymap = new HashMap();
-        for(String key : keySet){  //bundle.get(key);来获取对应的value
-            querymap.put(key,bundle.get(key));
+    private String bundleToJsonString(Intent data){
+        if(data!=null){
+            Bundle bundle = data.getExtras();
+            Set<String> keySet = bundle.keySet();  //获取所有的Key,
+            HashMap<String,Object> querymap = new HashMap();
+            for(String key : keySet){  //bundle.get(key);来获取对应的value
+                querymap.put(key,bundle.get(key));
+            }
+            return JSON.toJSONString(querymap);
         }
-        return JSON.toJSONString(querymap);
+        return "{}";
+
     }
 
     @Override
