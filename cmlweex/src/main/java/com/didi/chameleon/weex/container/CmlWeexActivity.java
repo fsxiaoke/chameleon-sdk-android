@@ -276,7 +276,7 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
         }
 
         private Intent getIntent(){
-            if(activity.getApplication().getApplicationInfo().packageName.equals("com.didi.chameleon.example")){
+            if(activity != null && activity.getApplication().getApplicationInfo().packageName.equals("com.didi.chameleon.example")){
                 return new Intent(activity, CmlWeexActivity.class);
             }else{
                 return new Intent("com.didi.chameleon.weex.action.WEEX");
