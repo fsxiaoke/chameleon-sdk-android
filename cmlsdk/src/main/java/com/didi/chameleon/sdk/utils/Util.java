@@ -7,6 +7,8 @@ import android.text.TextUtils;
 
 import com.didi.chameleon.sdk.CmlConstant;
 
+import java.net.URI;
+
 public class Util {
     private static final String TAG = "sdk_util";
 
@@ -58,9 +60,33 @@ public class Util {
                 // 兼容url被encode过
                 cmlUrl = Uri.parse(Uri.decode(url)).getQueryParameter(keyWord);
             }
+
+            if(cmlUrl == null){
+                URI  u = URI.create(url);
+                String query =  u.getQuery();
+                String[] temp =  query.split("&");
+
+                for(int i = 0; i < temp.length; i++){
+                    if(temp[i].contains("wx_addr")){
+                        String[] addrs = temp[i].split("=");
+                        cmlUrl = addrs[1];
+                        break;
+                    }
+                    if(temp[i].contains("cml_addr")){
+                        String[] addrs = temp[i].split("=");
+                        cmlUrl = addrs[1];
+                        break;
+                    }
+                }
+            }
+
         } catch (Exception e) {
             CmlLogUtil.e(TAG, "parseCmlUrl error, msg = " + e.toString());
         }
+
+
+
+
         return cmlUrl;
     }
 }
