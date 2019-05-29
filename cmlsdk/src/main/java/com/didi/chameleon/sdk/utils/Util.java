@@ -62,8 +62,12 @@ public class Util {
             }
 
             if(cmlUrl == null){
-                URI  u = URI.create(url);
-                String query =  u.getQuery();
+
+
+                String[] its = url.split("\\?");
+                if(its.length < 2) return cmlUrl;
+
+                String query =  its[1];
                 String[] temp =  query.split("&");
 
                 for(int i = 0; i < temp.length; i++){
