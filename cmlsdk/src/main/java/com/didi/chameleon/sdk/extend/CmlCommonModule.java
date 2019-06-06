@@ -32,10 +32,10 @@ public class CmlCommonModule {
     @CmlMethod(alias = "openPage")
     public void openNativePage(ICmlInstance instance, Activity activity,
                                @CmlParam(name = "url") String url, @CmlParam(name = "closeCurrent") boolean closeWeb) {
-        if (closeWeb) {
-            instance.finishSelf();
-        }
-        CmlEngine.getInstance().launchPage(activity, url, null);
+//        if (closeWeb) {
+//            instance.finishSelf();
+//        }
+//        CmlEngine.getInstance().launchPage(activity, url, null);
     }
 
     @CmlMethod(alias = "closePage")
