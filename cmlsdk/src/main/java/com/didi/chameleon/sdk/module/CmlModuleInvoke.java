@@ -238,6 +238,7 @@ public class CmlModuleInvoke {
         String param = wrapperParam(model.data);
         if (!TextUtils.isEmpty(param)) {
             param = URLEncoder.encode(param, "UTF-8");
+            param = param.replace("+", "%20");//encode后空格会转成+，在这里替换成%20
         }
         CmlCallbackModel<String> stringModel = new CmlCallbackModel<>();
         stringModel.errorNo = model.errorNo;
