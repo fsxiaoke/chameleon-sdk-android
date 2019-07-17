@@ -1,10 +1,7 @@
 package com.didi.chameleon.weex;
 
-import android.app.Activity;
-import android.app.Application;
-import android.content.Context;
-import android.support.annotation.NonNull;
-import android.text.TextUtils;
+import java.util.HashMap;
+import java.util.List;
 
 import com.didi.chameleon.sdk.CmlConstant;
 import com.didi.chameleon.sdk.CmlEngine;
@@ -15,7 +12,6 @@ import com.didi.chameleon.sdk.adapter.navigator.ICmlNavigatorAdapter;
 import com.didi.chameleon.sdk.bridge.ICmlBridge;
 import com.didi.chameleon.sdk.bridge.ICmlBridgeProtocol;
 import com.didi.chameleon.sdk.bundle.CmlBundle;
-import com.didi.chameleon.sdk.module.CmlModuleManager;
 import com.didi.chameleon.sdk.utils.CmlLogUtil;
 import com.didi.chameleon.sdk.utils.Util;
 import com.didi.chameleon.weex.adapter.CmlDefaultJsExceptionAdapter;
@@ -30,14 +26,16 @@ import com.didi.chameleon.weex.jsbundlemgr.CmlJsBundleEnvironment;
 import com.didi.chameleon.weex.jsbundlemgr.CmlJsBundleManager;
 import com.didi.chameleon.weex.jsbundlemgr.CmlJsBundleMgrConfig;
 import com.didi.chameleon.weex.jsbundlemgr.code.CmlGetCodeStringCallback;
-import com.didi.chameleon.weex.module.CmlFsEnvModule;
 import com.didi.chameleon.weex.module.CmlNavigatorModule;
 import com.taobao.weex.InitConfig;
 import com.taobao.weex.WXSDKEngine;
 import com.taobao.weex.common.WXException;
 
-import java.util.HashMap;
-import java.util.List;
+import android.app.Activity;
+import android.app.Application;
+import android.content.Context;
+import android.support.annotation.NonNull;
+import android.text.TextUtils;
 
 /**
  * <h3>Weex 引擎初始化入口</h3>
@@ -116,7 +114,6 @@ public class CmlWeexEngine implements ICmlEngine {
             } catch (WXException e) {
                 CmlLogUtil.d(TAG, "register weex bridge module error.");
             }
-            CmlModuleManager.getInstance().addCmlModule(CmlFsEnvModule.class);
         }
     }
 
