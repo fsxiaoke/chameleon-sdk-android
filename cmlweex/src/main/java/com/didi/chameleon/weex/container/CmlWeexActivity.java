@@ -163,10 +163,10 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
 
     @Override
     public void onDegradeToH5(String url, int degradeCode) {
-        if (CmlEnvironment.getDegradeAdapter() != null) {
-            CmlEnvironment.getDegradeAdapter().degradeActivity(this, url, this.options, degradeCode);
-        }
-        finish();
+//        if (CmlEnvironment.getDegradeAdapter() != null) {
+//            CmlEnvironment.getDegradeAdapter().degradeActivity(this, url, this.options, degradeCode);
+//        }
+//        finish();
     }
 
     @Override
