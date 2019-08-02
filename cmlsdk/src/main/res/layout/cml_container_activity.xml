@@ -7,6 +7,7 @@
     <com.didi.chameleon.sdk.widget.CmlTitleView
         android:id="@+id/cml_weex_title_bar"
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="40dp" />
 
     <FrameLayout
