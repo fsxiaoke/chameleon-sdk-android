@@ -2,8 +2,15 @@ apply plugin: 'com.android.library'
 //apply from: '../upload.gradle'
 
 
+
 buildscript {
     apply plugin: 'maven'
+    repositories {
+        flatDir {
+            dirs 'libs'   // aar目录
+        }
+    }
+
     dependencies {
 //        classpath 'com.android.tools.build:gradle:2.3.3'
 //        classpath 'com.vanniktech:gradle-android-junit-jacoco-plugin:0.5.0'
@@ -84,8 +91,8 @@ dependencies {
 //    compileOnly "com.taobao.android:weex_sdk:$WEEX_VER"
 
 //    compileOnly "fs-android:weex_debug:1.0_c50b234:debug@aar"
-    compileOnly(group: 'fs-android', name: 'weex_debug', version: '1.0_c50b234', ext: 'aar')
-
+//    compileOnly(group: 'fs-android', name: 'weex_debug', version: '1.0_a1c66af', ext: 'aar')
+    compileOnly(name: 'weex_debug', ext: 'aar')
     compileOnly 'com.squareup.okhttp3:okhttp:3.11.0' // 默认 web socket 框架
 
     if (Boolean.parseBoolean(PUBLISH)) {
