@@ -21,6 +21,6 @@ public class CmlDegradeDefault implements ICmlDegradeAdapter {
         if (url.contains("?")) {
             url = url.substring(0, url.indexOf("?"));
         }
-        CmlEngine.getInstance().launchPage(activity, url, null);
+//        CmlEngine.getInstance().launchPage(activity, url, null);
     }
 }

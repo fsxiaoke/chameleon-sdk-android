@@ -28,6 +28,9 @@ allprojects {
         }
         maven {url "http://maven.firstshare.cn/artifactory/libs-release-local" }
         maven { url "http://maven.firstshare.cn/artifactory/libs-snapshot-local" }
+        flatDir {
+            dirs 'libs'   // aar目录
+        }
     }
 }
 configurations.all {

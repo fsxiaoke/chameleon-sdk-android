@@ -18,7 +18,9 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     // 演示打开一般的URL
-    private static final String URL_NORMAL = "https://www.didiglobal.com";
+//    private static final String URL_NORMAL = "http://172.28.0.30:8000/?wx_addr=http%3A%2F%2F172.28.0.30%3A8081%2Fdist%2Findex.js";
+    private static final String URL_NORMAL = "http://172.28.0.30:8000/cml/h5/index?wx_addr=http%3A%2F%2F172.28.0.30%3A8000%2Fweex%2Findex.js%3Ft%3D1564731530968";
+
     // 这是一个可以正常打开的 JS_BUNDLE
     private static final String URL_JS_BUNDLE_OK = "http://172.29.1.198:8000/cml/h5/index?wx_addr=http%3A%2F%2F172.29.1.198%3A8000%2Fweex%2Fcmldemo.js%3Ft%3D1557388386647&path=%2Fpages%2Findex%2Findex";
     // 这是一个错误的 JS_BUNDLE
@@ -60,20 +62,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.txt_open_url:
-                CmlEngine.getInstance().launchPage(this, URL_NORMAL, null);
+                CmlEngine.getInstance().getCmlEngine().launchPage(this, URL_NORMAL, null);
                 break;
             case R.id.txt_open_js_bundle:
-                CmlEngine.getInstance().launchPage(this, URL_JS_BUNDLE_OK, null);
+                CmlEngine.getInstance().getCmlEngine().launchPage(this, URL_JS_BUNDLE_OK, null);
                 break;
             case R.id.txt_preload:
 //                CmlEngine.getInstance().launchPage(this, URL_JS_BUNDLE_PRELOAD, null);
                 weexdebug();
                 break;
             case R.id.txt_degrade:
-                CmlEngine.getInstance().launchPage(this, URL_JS_BUNDLE_ERR, null);
+                CmlEngine.getInstance().getCmlEngine().launchPage(this, URL_JS_BUNDLE_ERR, null);
                 break;
             case R.id.txt_module:
-                CmlEngine.getInstance().launchPage(this, URL_MODULE_DEMO, null);
+                CmlEngine.getInstance().getCmlEngine().launchPage(this, URL_MODULE_DEMO, null);
                 break;
         }
     }
