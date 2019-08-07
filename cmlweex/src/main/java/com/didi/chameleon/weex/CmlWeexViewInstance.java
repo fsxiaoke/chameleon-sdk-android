@@ -146,6 +146,8 @@ public class CmlWeexViewInstance implements ICmlViewInstance, IWXRenderListener 
                     params.put(CmlEnvironment.CML_QUERY_SDK, CmlEnvironment.VERSION);
                     params.put(CmlEnvironment.CML_QUERY_URL, mTotalUrl);
                     options.put(CmlConstant.WEEX_OPTIONS_KEY, params);
+                    //适配weex的自定内容
+                    options.put("bundleUrl", mCmlUrl);
                     renderView(template, options);
                 }
             }
