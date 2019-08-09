@@ -102,6 +102,11 @@ public class CmlView extends FrameLayout implements CmlWeexViewInstance.ICmlInst
     }
 
     @Override
+    public void onException(String url, String errCode, String msg) {
+
+    }
+
+    @Override
     public void onDegradeToH5(String url, int degradeCode) {
         if (getContext() == null || isDestroy) {
             return;
