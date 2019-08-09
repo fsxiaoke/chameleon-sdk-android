@@ -280,6 +280,9 @@ public class CmlWeexInstance implements ICmlActivityInstance, ICmlBaseLifecycle,
     @Override
     public void onException(WXSDKInstance instance, String errCode, String msg) {
         CmlLogUtil.e(TAG, "onException msg = " + msg);
+        if (mInstanceListener!=null){
+            mInstanceListener.onException(mTotalUrl,errCode,msg);
+        }
         if (BuildConfig.DEBUG) {
             showDebugInfo(msg);
         } else {
@@ -475,6 +478,7 @@ public class CmlWeexInstance implements ICmlActivityInstance, ICmlBaseLifecycle,
      */
 
     public interface ICmlInstanceListener {
+        void onException(String url,String errCode, String msg);
         /**
          * 降级到h5.需要容器自己实现
          */

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -160,13 +161,17 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
     }
 
 
+    @Override
+    public void onException(String url, String errCode, String msg) {
+        loadingView.setVisibility(View.GONE);
+    }
 
     @Override
     public void onDegradeToH5(String url, int degradeCode) {
         if (CmlEnvironment.getDegradeAdapter() != null) {
             CmlEnvironment.getDegradeAdapter().degradeActivity(this, url, this.options, degradeCode);
         }
-        finish();
+//        finish();
     }
 
     @Override
