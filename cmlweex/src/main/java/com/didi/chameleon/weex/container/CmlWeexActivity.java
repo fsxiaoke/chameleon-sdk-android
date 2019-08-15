@@ -1,8 +1,11 @@
 package com.didi.chameleon.weex.container;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.opengl.Visibility;
 import android.os.Bundle;
@@ -162,6 +165,10 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
     }
 
 
+    public boolean isDevPackage(){
+        return true;
+    }
+
     @Override
     public void onException(String url, String errCode, String msg) {
         loadingView.setVisibility(View.GONE);
@@ -172,7 +179,33 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
         if (CmlEnvironment.getDegradeAdapter() != null) {
             CmlEnvironment.getDegradeAdapter().degradeActivity(this, url, this.options, degradeCode);
         }
+
+        loadingView.setVisibility(View.GONE);
+
+        if(isDevPackage()){
+            if(degradeCode == 4){
+                showDialog("Bundle下载失败，请检查环境和配置");
+            }
+        }
+
+
 //        finish();
+    }
+
+
+    public void showDialog(String msg){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(msg);
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (dialog != null) {
+                    dialog.dismiss();
+                }
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     @Override

@@ -71,8 +71,8 @@ dependencies {
     implementation project(':rich-text-component')
     implementation project(':sdk-image')
     implementation project(':sdk-location')
-    implementation(name: 'weex_debug', ext: 'aar')
-
+//    implementation(name: 'weex_debug', ext: 'aar')
+    implementation(group: 'fs-android', name: 'weex_debug', version: "$WEEX_SDK_VERSION", ext: 'aar')
     debugImplementation 'com.taobao.android.weex_inspection:protocol:1.1.4.1'
     debugImplementation 'com.taobao.android:weex_inspector:0.18.10'
     debugImplementation ('com.squareup.okhttp:okhttp:2.3.0'){
