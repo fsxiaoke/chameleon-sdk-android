@@ -4,17 +4,17 @@
     android:layout_height="match_parent"
     android:background="@color/cml_white">
 
-    <com.didi.chameleon.sdk.widget.CmlTitleView
-        android:id="@+id/cml_weex_title_bar"
-        android:layout_width="match_parent"
-        android:visibility="gone"
-        android:layout_height="40dp" />
 
     <FrameLayout
         android:id="@+id/cml_weex_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/cml_weex_title_bar" />
+         />
+
+    <com.didi.chameleon.sdk.widget.CmlTitleView
+            android:id="@+id/cml_weex_title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="48dp" />
 
     <include
         android:id="@+id/cml_weex_loading_layout"
