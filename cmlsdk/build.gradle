@@ -44,10 +44,8 @@ buildscript {
     }
 
     artifacts {
-        archives file:file("$buildDir/outputs/aar/cmlsdk-release.aar"), name:'cmlsdk', type: 'aar'
-        archives file:file("$buildDir/intermediates/intermediate-jars/release/classes.jar")
-
-
+        archives file:file("$buildDir/outputs/aar/cmlweex-release.aar"), name:"$project.name", type: 'aar'
+        archives file:file("$buildDir/intermediates/bundles/release/classes.jar")
 
     }
 
