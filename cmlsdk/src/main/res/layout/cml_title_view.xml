@@ -11,7 +11,6 @@
         android:id="@+id/cml_title_view_left_btn"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_marginLeft="16dp"
         android:orientation="horizontal">
 
         <ImageView
@@ -44,7 +43,6 @@
         android:layout_alignParentRight="true"
         android:gravity="center_vertical"
         android:paddingLeft="10dp"
-        android:paddingRight="16dp"
         android:textColor="@color/cml_666666"
         android:textSize="14sp"
         android:visibility="gone" />
