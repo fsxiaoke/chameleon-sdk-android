@@ -143,7 +143,11 @@ public class CmlWeexViewInstance implements ICmlViewInstance, IWXRenderListener 
                         params.putAll(extendsParam);
                     }
                     params.putAll(parseUrl(url));
+                    params.put(CmlEnvironment.CML_QUERY_SDK, CmlEnvironment.VERSION);
+                    params.put(CmlEnvironment.CML_QUERY_URL, mTotalUrl);
                     options.put(CmlConstant.WEEX_OPTIONS_KEY, params);
+                    //适配weex的自定内容
+                    options.put("bundleUrl", mCmlUrl);
                     renderView(template, options);
                 }
             }
@@ -250,6 +254,9 @@ public class CmlWeexViewInstance implements ICmlViewInstance, IWXRenderListener 
     @Override
     public void onException(WXSDKInstance instance, String errCode, String msg) {
         CmlLogUtil.e(TAG, "onException msg = " + msg);
+        if (mInstanceListener!=null){
+            mInstanceListener.onException(mTotalUrl,errCode,msg);
+        }
         if (BuildConfig.DEBUG) {
             showDebugInfo(msg);
         } else {
@@ -420,6 +427,7 @@ public class CmlWeexViewInstance implements ICmlViewInstance, IWXRenderListener 
      */
 
     public interface ICmlInstanceListener {
+        void onException(String url,String errCode, String msg);
         /**
          * 降级到h5.需要容器自己实现
          */

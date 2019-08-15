@@ -178,7 +178,7 @@ public class CmlEngine {
      * @param url      Chameleon url，也可以只传入一个标准的http/https地址
      * @param options  调起参数，可以传 null
      */
-    private void launchPage(@NonNull Activity activity, String url, HashMap<String, Object> options) {
+    public void launchPage(@NonNull Activity activity, String url, HashMap<String, Object> options) {
         if (TextUtils.isEmpty(url)) {
             CmlLogUtil.e(TAG, "CmlEngine launchPage, url is empty.");
             return;

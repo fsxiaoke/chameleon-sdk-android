@@ -38,6 +38,7 @@ public class CmlModuleManager {
             @Override
             public void onRemoveInstance(String instanceId) {
                 store.removeInstance(instanceId);
+                CmlBridgeManager.getInstance().destroy(instanceId); //xiongtj 不销毁会有内存泄漏
             }
         });
     }
