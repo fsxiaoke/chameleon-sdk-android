@@ -74,4 +74,14 @@ public class CmlBridgeManager {
         }
         return bridgeNativeToJs;
     }
+
+    public void destroy(String instanceId){
+        if(mNativeToJsBridges.containsKey(instanceId)){
+            mNativeToJsBridges.remove(instanceId);
+        }
+
+        if(mJsToNativeBridges.containsKey(instanceId)){
+            mJsToNativeBridges.remove(instanceId);
+        }
+    }
 }
