@@ -92,7 +92,12 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
                     CmlLogUtil.e(TAG, "url cant be null !");
                     return;
                 }
+
+                mWXInstance.clearCache(url);
                 mWXInstance.reload(url);
+
+
+
             }
         });
     }

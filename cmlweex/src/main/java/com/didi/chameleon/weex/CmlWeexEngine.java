@@ -148,4 +148,9 @@ public class CmlWeexEngine implements ICmlEngine {
         }
         cmlJsBundleManager.getWXTemplate(url, callback);
     }
+
+
+    void clearCache(String url){
+        cmlJsBundleManager.clearCache(url);
+    }
 }

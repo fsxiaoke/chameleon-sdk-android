@@ -200,6 +200,10 @@ public class CmlWeexInstance implements ICmlActivityInstance, ICmlBaseLifecycle,
         }
     }
 
+    public void clearCache(String url){
+        CmlWeexEngine.getInstance().clearCache(url);
+    }
+
     /**
      * 获取url中的参数
      */

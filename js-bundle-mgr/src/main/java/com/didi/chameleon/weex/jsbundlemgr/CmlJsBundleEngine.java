@@ -113,4 +113,11 @@ public class CmlJsBundleEngine implements CmlJsBundleManager {
         }
 
     }
+
+    @Override
+    public void clearCache(String url) {
+        if(fsBundleManager != null){
+            fsBundleManager.clearCache(url);
+        }
+    }
 }
