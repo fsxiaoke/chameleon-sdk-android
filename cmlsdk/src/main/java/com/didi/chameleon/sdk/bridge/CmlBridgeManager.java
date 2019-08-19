@@ -67,6 +67,7 @@ public class CmlBridgeManager {
     private ICmlBridgeNativeToJs getBridgeNativeToJs(String instanceId) {
         ICmlBridgeNativeToJs bridgeNativeToJs = null;
         ICmlInstance instance = CmlInstanceManage.getInstance().getCmlInstance(instanceId);
+        if(instance == null) return null;
         ICmlBridgeNativeToJsFactory nativeToJsFactory = mBridgeNativeToJsFactories.get(instance.getClass());
         if (null != nativeToJsFactory) {
             bridgeNativeToJs = nativeToJsFactory.getBridgeNativeToJs(instanceId);
