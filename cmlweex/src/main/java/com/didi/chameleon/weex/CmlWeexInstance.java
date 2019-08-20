@@ -201,7 +201,8 @@ public class CmlWeexInstance implements ICmlActivityInstance, ICmlBaseLifecycle,
     }
 
     public void clearCache(String url){
-        CmlWeexEngine.getInstance().clearCache(url);
+        String bundlename = Util.parseCmlUrl(url);
+        CmlWeexEngine.getInstance().clearCache(bundlename);
     }
 
     /**
