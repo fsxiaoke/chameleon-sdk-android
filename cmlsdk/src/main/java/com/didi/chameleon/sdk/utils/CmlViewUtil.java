@@ -1,8 +1,11 @@
 package com.didi.chameleon.sdk.utils;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Point;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
@@ -90,5 +93,100 @@ public class CmlViewUtil {
         mNavigationHeight = height;
         return height;
     }
+    /**
+     * 虚拟按键高度（如果没有或没显示则是0） fs实现
+     */
+    public static int getNavBarHeight(Context ctx) {
+        int rst = 0;
+        if (isAllScreenDevice(ctx)){
+            rst = getScreenRealHeight(ctx) - getScreenHeight(ctx) - getStatusBarHeight(ctx);
+        }else {
+            rst = getHasVirtualKey(ctx) - getScreenHeight(ctx);
+        }
+        if (rst < 0){
+            rst = 0;
+        }
+        return rst;
+    }
+    private volatile static boolean mHasCheckAllScreen;
+    private volatile static boolean mIsAllScreenDevice;
 
+    public static boolean isAllScreenDevice(Context ctx) {
+        if (mHasCheckAllScreen) {
+            return mIsAllScreenDevice;
+        }
+        mHasCheckAllScreen = true;
+        mIsAllScreenDevice = false;
+        // 低于 API 21的，都不会是全面屏。。。
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            return false;
+        }
+        WindowManager windowManager = (WindowManager) ctx.getSystemService(Context.WINDOW_SERVICE);
+        if (windowManager != null) {
+            Display display = windowManager.getDefaultDisplay();
+            Point point = new Point();
+            display.getRealSize(point);
+            float width, height;
+            if (point.x < point.y) {
+                width = point.x;
+                height = point.y;
+            } else {
+                width = point.y;
+                height = point.x;
+            }
+            if (height / width >= 1.97f) {
+                mIsAllScreenDevice = true;
+            }
+        }
+        return mIsAllScreenDevice;
+    }
+    private static final int PORTRAIT = 0;
+    private static final int LANDSCAPE = 1;
+    @NonNull
+    private volatile static Point[] mRealSizes = new Point[2];
+
+
+    private static int getScreenRealHeight(Context ctx) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            return getScreenHeight(ctx);
+        }
+
+        int orientation = ctx.getResources().getConfiguration().orientation;
+        orientation = orientation == Configuration.ORIENTATION_PORTRAIT ? PORTRAIT : LANDSCAPE;
+
+        if (mRealSizes[orientation] == null) {
+            WindowManager windowManager = (WindowManager) ctx.getSystemService(Context.WINDOW_SERVICE);
+            if (windowManager == null) {
+                return getScreenHeight(ctx);
+            }
+            Display display = windowManager.getDefaultDisplay();
+            Point point = new Point();
+            display.getRealSize(point);
+            mRealSizes[orientation] = point;
+        }
+        return mRealSizes[orientation].y;
+    }
+    /**
+     * 获取屏幕高度包括虚拟按键
+     * @return
+     */
+    public static int getHasVirtualKey(Context ctx) {
+        int dpi = 0;
+        WindowManager windowManager = (WindowManager) ctx
+                .getSystemService(Context.WINDOW_SERVICE);
+        Display display = windowManager.getDefaultDisplay();
+        DisplayMetrics dm = new DisplayMetrics();
+        @SuppressWarnings("rawtypes")
+        Class c;
+        try {
+            c = Class.forName("android.view.Display");
+            @SuppressWarnings("unchecked")
+            Method method = c.getMethod("getRealMetrics", DisplayMetrics.class);
+            method.invoke(display, dm);
+            dpi = dm.heightPixels;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return dpi;
+    }
 }
