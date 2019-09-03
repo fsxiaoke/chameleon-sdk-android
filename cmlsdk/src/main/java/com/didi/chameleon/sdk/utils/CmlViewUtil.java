@@ -3,6 +3,7 @@ package com.didi.chameleon.sdk.utils;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Build;
+import android.provider.Settings;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
@@ -76,10 +77,11 @@ public class CmlViewUtil {
             return mNavigationHeight;
         }
         int height = 0;
+        DisplayMetrics dm = null;
         try {
             WindowManager windowManager = (WindowManager) ctx.getSystemService(Context.WINDOW_SERVICE);
             Display display = windowManager.getDefaultDisplay();
-            DisplayMetrics dm = new DisplayMetrics();
+            dm = new DisplayMetrics();
             Class c = Class.forName("android.view.Display");
             Method method = c.getMethod("getRealMetrics", DisplayMetrics.class);
             method.invoke(display, dm);
@@ -87,8 +89,38 @@ public class CmlViewUtil {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        mNavigationHeight = height;
-        return height;
+
+        final boolean isMeiZu = Build.MANUFACTURER.equals("Meizu");
+        if (isMeiZu) {
+            mNavigationHeight = getSmartBarHeight(ctx,dm);
+        }
+
+        if(mNavigationHeight==0){
+            mNavigationHeight = height;
+        }
+        return mNavigationHeight;
+    }
+
+
+    // 获取魅族SmartBar高度
+    private static int getSmartBarHeight(Context ctx,DisplayMetrics metrics) {
+        final boolean isMeiZu = Build.MANUFACTURER.equals("Meizu");
+
+        final boolean autoHideSmartBar = Settings.System.getInt(ctx.getContentResolver(),
+                "mz_smartbar_auto_hide", 0) == 1;
+
+        if (!isMeiZu || autoHideSmartBar) {
+            return 0;
+        }
+        try {
+            Class c = Class.forName("com.android.internal.R$dimen");
+            Object obj = c.newInstance();
+            Field field = c.getField("mz_action_button_min_height");
+            int height = Integer.parseInt(field.get(obj).toString());
+            return (int)(ctx.getResources().getDimensionPixelSize(height) /metrics.density);
+        } catch (Throwable e) { // 不自动隐藏smartbar同时又没有smartbar高度字段供访问，取系统navigationbar的高度
+        }
+        return 0;
     }
 
 }
