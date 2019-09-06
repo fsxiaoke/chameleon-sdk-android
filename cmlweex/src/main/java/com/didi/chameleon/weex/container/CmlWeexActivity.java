@@ -16,6 +16,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.didi.chameleon.sdk.CmlEngine;
@@ -44,7 +45,7 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
     private static final String TAG = "CmlWeexActivity";
     protected CmlWeexInstance mWXInstance;
 
-    private View loadingView;
+    protected View loadingView;
     private CmlTitleView titleView;
     private View objectView;
     private ViewGroup viewContainer;
@@ -119,6 +120,14 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
             mWXInstance.renderByUrl(url, options);
         }
     }
+
+    protected void setLoadingMsg(String msg){
+        if(loadingView!=null){
+            TextView textView = loadingView.findViewById(R.id.loadingMsg);
+            textView.setText(msg);
+        }
+    }
+
 
     @Override
     public String getInstanceId() {
