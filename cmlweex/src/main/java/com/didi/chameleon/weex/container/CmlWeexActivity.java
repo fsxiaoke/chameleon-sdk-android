@@ -109,6 +109,7 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
 
     @Override
     protected void renderByUrl() {
+        setLoadingMsg(getString(R.string.cml_loading_msg));
         Intent intent = getIntent();
         String url = intent.getStringExtra(PARAM_URL);
         if (TextUtils.isEmpty(url)) {
