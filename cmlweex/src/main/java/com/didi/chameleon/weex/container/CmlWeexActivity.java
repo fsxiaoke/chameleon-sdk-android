@@ -190,18 +190,27 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
     }
 
     @Override
-    public void onDegradeToH5(String url, int degradeCode) {
-        if (CmlEnvironment.getDegradeAdapter() != null) {
-            CmlEnvironment.getDegradeAdapter().degradeActivity(this, url, this.options, degradeCode);
-        }
+    public void onDegradeToH5(final String url, final int degradeCode) {
 
-        loadingView.setVisibility(View.GONE);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
 
-        if(isDevPackage()){
-            if(degradeCode == 4){
-                showDialog("Bundle下载失败，请检查环境和配置");
+                if (CmlEnvironment.getDegradeAdapter() != null) {
+                    CmlEnvironment.getDegradeAdapter().degradeActivity(CmlWeexActivity.this, url, CmlWeexActivity.this.options,
+                            degradeCode);
+                }
+
+                loadingView.setVisibility(View.GONE);
+
+                if(isDevPackage()){
+                    if(degradeCode == 4){
+                        showDialog("Bundle下载失败，请检查环境和配置");
+                    }
+                }
             }
-        }
+        });
+
 
 
 //        finish();
