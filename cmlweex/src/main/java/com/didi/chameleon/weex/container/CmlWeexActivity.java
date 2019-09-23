@@ -16,6 +16,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.didi.chameleon.sdk.CmlEngine;
@@ -44,7 +45,7 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
     private static final String TAG = "CmlWeexActivity";
     protected CmlWeexInstance mWXInstance;
 
-    private View loadingView;
+    protected View loadingView;
     private CmlTitleView titleView;
     private View objectView;
     private ViewGroup viewContainer;
@@ -108,6 +109,7 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
 
     @Override
     protected void renderByUrl() {
+        setLoadingMsg(getString(R.string.cml_loading_msg));
         Intent intent = getIntent();
         String url = intent.getStringExtra(PARAM_URL);
         if (TextUtils.isEmpty(url)) {
@@ -119,6 +121,14 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
             mWXInstance.renderByUrl(url, options);
         }
     }
+
+    protected void setLoadingMsg(String msg){
+        if(loadingView!=null){
+            TextView textView = loadingView.findViewById(R.id.loadingMsg);
+            textView.setText(msg);
+        }
+    }
+
 
     @Override
     public String getInstanceId() {
@@ -180,18 +190,27 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
     }
 
     @Override
-    public void onDegradeToH5(String url, int degradeCode) {
-        if (CmlEnvironment.getDegradeAdapter() != null) {
-            CmlEnvironment.getDegradeAdapter().degradeActivity(this, url, this.options, degradeCode);
-        }
+    public void onDegradeToH5(final String url, final int degradeCode) {
 
-        loadingView.setVisibility(View.GONE);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
 
-        if(isDevPackage()){
-            if(degradeCode == 4){
-                showDialog("Bundle下载失败，请检查环境和配置");
+                if (CmlEnvironment.getDegradeAdapter() != null) {
+                    CmlEnvironment.getDegradeAdapter().degradeActivity(CmlWeexActivity.this, url, CmlWeexActivity.this.options,
+                            degradeCode);
+                }
+
+                loadingView.setVisibility(View.GONE);
+
+                if(isDevPackage()){
+                    if(degradeCode == 4){
+                        showDialog("Bundle下载失败，请检查环境和配置");
+                    }
+                }
             }
-        }
+        });
+
 
 
 //        finish();
