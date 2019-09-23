@@ -77,7 +77,7 @@ public class CmlCommonModule {
             extObject.put("imei", CmlSystemUtil.getIMEI(context));
             extObject.put("netType", CmlSystemUtil.getNetworkType(context));
             extObject.put("statusbarHeight", CmlViewUtil.getStatusBarHeight(context));
-            extObject.put("navigationHeight", CmlViewUtil.getVirtualBarHeight(context));
+            extObject.put("navigationHeight", CmlViewUtil.getNavBarHeight(context));
             extObject.put("viewHeight", instance.getObjectView() == null ? 0 : instance.getObjectView().getHeight());
             object.put("extraParams", extObject);
         } catch (JSONException e) {
