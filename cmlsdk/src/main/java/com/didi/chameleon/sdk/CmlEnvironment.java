@@ -34,7 +34,7 @@ public class CmlEnvironment {
     /**
      * 调试开关
      */
-    public static final boolean DEBUG = true;
+    public static boolean DEBUG = true;
     /**
      * 页面是否直接降级
      */
