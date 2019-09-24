@@ -105,9 +105,22 @@ public class CmlViewUtil {
         }else {
             rst = getHasVirtualKey(ctx) - getScreenHeight(ctx);
         }
-        if (rst < 0){
+        if (rst <= 0){
             rst = 0;
+            final boolean isMeiZu = Build.MANUFACTURER.equals("Meizu");
+            if (isMeiZu) {
+                WindowManager windowManager = (WindowManager) ctx.getSystemService(Context.WINDOW_SERVICE);
+                Display display = windowManager.getDefaultDisplay();
+                DisplayMetrics dm = new DisplayMetrics();
+                int height = getSmartBarHeight(ctx,dm);
+                if(height>0){
+                    rst = height;
+                }
+            }
+
         }
+
+
         return rst;
     }
     private volatile static boolean mHasCheckAllScreen;
