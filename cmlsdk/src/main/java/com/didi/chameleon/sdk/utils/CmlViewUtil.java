@@ -109,13 +109,20 @@ public class CmlViewUtil {
     public static int getNavBarHeight(Context ctx) {
         int rst = 0;
         if (isAllScreenDevice(ctx)){
-            rst = getScreenRealHeight(ctx) - getScreenHeight(ctx) - getStatusBarHeight(ctx);
+
+            final boolean isOppoOrVivo =
+                    Build.MANUFACTURER.equalsIgnoreCase("oppo")||Build.MANUFACTURER.equalsIgnoreCase("vivo");
+            if(isOppoOrVivo){
+                rst = getScreenRealHeight(ctx) - getScreenHeight(ctx);
+            }else{
+                rst = getScreenRealHeight(ctx) - getScreenHeight(ctx) - getStatusBarHeight(ctx);
+            }
         }else {
             rst = getHasVirtualKey(ctx) - getScreenHeight(ctx);
         }
         if (rst <= 0){
             rst = 0;
-            final boolean isMeiZu = Build.MANUFACTURER.equals("Meizu");
+            final boolean isMeiZu = Build.MANUFACTURER.equalsIgnoreCase("meizu");
             if (isMeiZu) {
                 WindowManager windowManager = (WindowManager) ctx.getSystemService(Context.WINDOW_SERVICE);
                 Display display = windowManager.getDefaultDisplay();
