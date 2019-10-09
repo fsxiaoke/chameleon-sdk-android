@@ -38,7 +38,15 @@ public class CmlViewUtil {
         return mScreenWidth;
     }
 
+    public static DisplayMetrics getDisplayMetrics(Context ctx) {
+        return ctx.getApplicationContext().getResources().getDisplayMetrics();
+    }
+
     public static int getScreenHeight(Context ctx) {
+        return getDisplayMetrics(ctx).heightPixels;
+    }
+
+    public static int getDeviceHeight(Context ctx) {
         if (ctx == null) {
             return mScreenHeight;
         }

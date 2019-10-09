@@ -71,7 +71,7 @@ public class CmlCommonModule {
         try {
             object.put("scale", CmlViewUtil.getDensity(context));
             object.put("deviceWidth", CmlViewUtil.getScreenWidth(context));
-            object.put("deviceHeight", CmlViewUtil.getScreenHeight(context));
+            object.put("deviceHeight", CmlViewUtil.getDeviceHeight(context));
             object.put("os", "android");
             extObject.put("model", CmlSystemUtil.getModel());
             extObject.put("imei", CmlSystemUtil.getIMEI(context));
