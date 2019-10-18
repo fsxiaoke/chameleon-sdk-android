@@ -10,17 +10,19 @@ import org.json.JSONObject;
 
 import java.util.Map;
 
+import android.content.Context;
+
 @CmlModule(alias = "stream")
 public class CmlStreamModule {
 
 
     @CmlMethod(alias = "fetch", uiThread = false)
-    public void fetch(@CmlParam(name = "method") String method, @CmlParam(name = "url") String url,
+    public void fetch(Context context, @CmlParam(name = "method") String method, @CmlParam(name = "url") String url,
                       @CmlParam(name = "headers") JSONObject headers, @CmlParam(name = "body") String body,
                       @CmlParam(name = "type") String type, @CmlParam(name = "timeout") int timeout,
                       CmlCallback<Map> callback) {
         CmlEnvironment.getStreamHttp()
-                .fetch(method, url, headers, body, type, timeout, callback, null);
+                .fetch(context,method, url, headers, body, type, timeout, callback, null);
     }
 
 }

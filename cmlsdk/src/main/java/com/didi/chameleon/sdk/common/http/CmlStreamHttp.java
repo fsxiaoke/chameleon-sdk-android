@@ -1,5 +1,6 @@
 package com.didi.chameleon.sdk.common.http;
 
+import android.content.Context;
 import android.net.Uri;
 
 import com.didi.chameleon.sdk.CmlEnvironment;
@@ -35,7 +36,8 @@ public class CmlStreamHttp {
         mAdapter = adapter;
     }
 
-    public void fetch(String method, String url, JSONObject headers, String body, String type, int timeout,
+    public void fetch(Context context, String method, String url, JSONObject headers, String body, String type,
+                      int timeout,
                       final CmlCallback<Map> callback, CmlCallback<Map> progressCallback) {
         if (method != null) method = method.toUpperCase();
         CmlOptions.Builder builder = new CmlOptions.Builder()
@@ -52,7 +54,7 @@ public class CmlStreamHttp {
 
         extractHeaders(headers, builder);
         final CmlOptions options = builder.createOptions();
-        sendRequest(options, new ResponseCallback() {
+        sendRequest(context,options, new ResponseCallback() {
             @Override
             public void onResponse(CmlResponse response, Map<String, String> headers) {
                 if (callback != null) {
@@ -155,8 +157,9 @@ public class CmlStreamHttp {
     }
 
 
-    private void sendRequest(CmlOptions options, ResponseCallback callback, CmlCallback<Map> progressCallback) {
+    private void sendRequest(Context context,CmlOptions options, ResponseCallback callback, CmlCallback<Map> progressCallback) {
         CmlRequest cmlRequest = new CmlRequest();
+        cmlRequest.context = context;
         cmlRequest.method = options.getMethod();
         cmlRequest.url = Uri.parse(options.getUrl()).toString();
         cmlRequest.body = options.getBody();

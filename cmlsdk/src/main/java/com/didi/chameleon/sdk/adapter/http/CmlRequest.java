@@ -20,7 +20,11 @@ package com.didi.chameleon.sdk.adapter.http;
 
 import java.util.Map;
 
+import android.content.Context;
+
 public class CmlRequest {
+
+    public Context context;
 
     /**
      * The request parameter
