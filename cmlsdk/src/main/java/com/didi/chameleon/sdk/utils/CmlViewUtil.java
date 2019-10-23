@@ -110,9 +110,9 @@ public class CmlViewUtil {
         int rst = 0;
         if (isAllScreenDevice(ctx)){
 
-            final boolean isOppoOrVivo =
-                    Build.MANUFACTURER.equalsIgnoreCase("oppo")||Build.MANUFACTURER.equalsIgnoreCase("vivo");
-            if(isOppoOrVivo){
+            final boolean isOppoOrVivoOrMix =
+                    Build.MANUFACTURER.equalsIgnoreCase("oppo")||Build.MANUFACTURER.equalsIgnoreCase("vivo")||Build.MODEL.startsWith("MIX");
+            if(isOppoOrVivoOrMix){
                 rst = getScreenRealHeight(ctx) - getScreenHeight(ctx);
             }else{
                 rst = getScreenRealHeight(ctx) - getScreenHeight(ctx) - getStatusBarHeight(ctx);
