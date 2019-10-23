@@ -110,12 +110,16 @@ public class CmlViewUtil {
         int rst = 0;
         if (isAllScreenDevice(ctx)){
 
-            final boolean isOppoOrVivoOrMix =
-                    Build.MANUFACTURER.equalsIgnoreCase("oppo")||Build.MANUFACTURER.equalsIgnoreCase("vivo")||Build.MODEL.startsWith("MIX");
-            if(isOppoOrVivoOrMix){
+            final boolean isOppoOrVivo =
+                    Build.MANUFACTURER.equalsIgnoreCase("oppo")||Build.MANUFACTURER.equalsIgnoreCase("vivo");
+            if(isOppoOrVivo){
                 rst = getScreenRealHeight(ctx) - getScreenHeight(ctx);
             }else{
-                rst = getScreenRealHeight(ctx) - getScreenHeight(ctx) - getStatusBarHeight(ctx);
+                int statusBar = getStatusBarHeight(ctx);
+                rst = getScreenRealHeight(ctx) - getScreenHeight(ctx) - statusBar;
+                if(rst< statusBar){//兼容getScreenHeight包含状态栏，导航栏一般不可能不状态栏小
+                    rst += statusBar;
+                }
             }
         }else {
             rst = getHasVirtualKey(ctx) - getScreenHeight(ctx);
