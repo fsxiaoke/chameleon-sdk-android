@@ -108,11 +108,11 @@ public class CmlViewUtil {
      */
     public static int getNavBarHeight(Context ctx) {
         int rst = 0;
-        if (isAllScreenDevice(ctx)){
 
-            final boolean isOppoOrVivo =
-                    Build.MANUFACTURER.equalsIgnoreCase("oppo")||Build.MANUFACTURER.equalsIgnoreCase("vivo");
-            if(isOppoOrVivo){
+        if (isAllScreenDevice(ctx)){
+            if(Build.MANUFACTURER.equalsIgnoreCase("xiaomi") && !isXiaoMiNavigationBarShow(ctx)){ //小米手机判断如果导航栏不显示直接返回0
+                return 0;
+            }else  if(Build.MANUFACTURER.equalsIgnoreCase("oppo")||Build.MANUFACTURER.equalsIgnoreCase("vivo")){
                 rst = getScreenRealHeight(ctx) - getScreenHeight(ctx);
             }else{
                 int statusBar = getStatusBarHeight(ctx);
@@ -242,5 +242,15 @@ public class CmlViewUtil {
         } catch (Throwable e) { // 不自动隐藏smartbar同时又没有smartbar高度字段供访问，取系统navigationbar的高度
         }
         return 0;
+    }
+
+    public static boolean isXiaoMiNavigationBarShow(Context context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            if (Settings.Global.getInt(context.getContentResolver(), "force_fsg_nav_bar", 0) != 0) {
+                //开启手势，不显示虚拟键
+                return false;
+            }
+        }
+        return true;
     }
 }
