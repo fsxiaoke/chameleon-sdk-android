@@ -76,6 +76,7 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
         titleView = findViewById(R.id.cml_weex_title_bar);
         loadingView = findViewById(R.id.cml_weex_loading_layout);
         viewContainer = findViewById(R.id.cml_weex_content);
+        objectView = viewContainer;
         titleView.showLeftBackDrawable(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
