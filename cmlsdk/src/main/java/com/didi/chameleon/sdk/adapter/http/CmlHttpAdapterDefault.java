@@ -73,7 +73,7 @@ public class CmlHttpAdapterDefault implements CmlHttpAdapter {
                     if (responseCode >= 200 && responseCode <= 299) {
                         InputStream rawStream = connection.getInputStream();
                         rawStream = reporter.interpretResponseStream(rawStream);
-                        response.originalData = readInputStreamAsBytes(rawStream, listener);
+                        response.data = readInputStream(rawStream, listener);
                     } else {
                         response.errorMsg = readInputStream(connection.getErrorStream(), listener);
                     }

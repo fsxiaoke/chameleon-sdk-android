@@ -66,14 +66,14 @@ public class CmlStreamHttp {
                         int code = Integer.parseInt(response.statusCode);
                         resp.put(STATUS, code);
                         resp.put("ok", (code >= 200 && code <= 299));
-                        if (response.originalData == null) {
+                        if (response.data == null) {
                             resp.put("data", null);
                         } else {
-                            String respData = readAsString(response.originalData,
-                                    headers != null ? getHeader(headers, "Content-Type") : ""
-                            );
+//                            String respData = readAsString(response.originalData,
+//                                    headers != null ? getHeader(headers, "Content-Type") : ""
+//                            );
                             try {
-                                resp.put("data", parseData(respData, options.getType()));
+                                resp.put("data", parseData(response.data, options.getType()));
                             } catch (JSONException exception) {
                                 CmlLogUtil.et(exception);
                                 resp.put("ok", false);
@@ -247,7 +247,8 @@ public class CmlStreamHttp {
             }
 
             if (CmlEnvironment.DEBUG) {
-                CmlLogUtil.d("cmlStreamModule", response != null && response.originalData != null ? new String(response.originalData) : "response data is NUll!");
+                CmlLogUtil.d("cmlStreamModule", response != null && response.data != null ?
+                        response.data : "response data is NUll!");
             }
         }
     }
