@@ -20,7 +20,7 @@
             android:layout_gravity="center"
             android:scaleType="fitCenter"
             android:src="@drawable/cml_title_view_btn_back_selector"
-            android:visibility="visible" />
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/cml_header_left_btn"
