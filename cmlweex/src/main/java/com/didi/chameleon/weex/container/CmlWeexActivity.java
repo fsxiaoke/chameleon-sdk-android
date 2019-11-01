@@ -1,24 +1,7 @@
 package com.didi.chameleon.weex.container;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.opengl.Visibility;
-import android.os.Bundle;
-import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
+import java.util.HashMap;
 
-import com.alibaba.fastjson.JSON;
 import com.didi.chameleon.sdk.CmlEngine;
 import com.didi.chameleon.sdk.CmlEnvironment;
 import com.didi.chameleon.sdk.CmlInstanceManage;
@@ -32,8 +15,18 @@ import com.didi.chameleon.weex.CmlWeexEngine;
 import com.didi.chameleon.weex.CmlWeexInstance;
 import com.didi.chameleon.weex.R;
 
-import java.util.HashMap;
-import java.util.Set;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.text.TextUtils;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 /**
  * 用来展示 Chameleon Weex 页面，通过{@link Launch} 或者{@link CmlWeexEngine#launchPage(Activity, String, HashMap)}进行启动
@@ -238,12 +231,12 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
         objectView = view;
         viewContainer.addView(view);
         loadingView.setVisibility(View.GONE);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                titleView.setVisibility(View.GONE);
-            }
-        },300);
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                titleView.setVisibility(View.GONE);
+//            }
+//        },300);
 
 
     }

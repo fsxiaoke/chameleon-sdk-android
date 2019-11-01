@@ -5,6 +5,7 @@
     android:layout_width="fill_parent"
     android:layout_height="48dp"
     android:background="#3C394B"
+    android:visibility="gone"
     android:clickable="true">
 
     <LinearLayout
@@ -19,8 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:scaleType="fitCenter"
-            android:src="@drawable/cml_title_view_btn_back_selector"
-            android:visibility="gone" />
+            android:src="@drawable/cml_title_view_btn_back_selector" />
 
         <TextView
             android:id="@+id/cml_header_left_btn"
