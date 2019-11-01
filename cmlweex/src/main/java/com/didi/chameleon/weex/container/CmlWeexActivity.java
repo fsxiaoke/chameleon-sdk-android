@@ -77,12 +77,12 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
         loadingView = findViewById(R.id.cml_weex_loading_layout);
         viewContainer = findViewById(R.id.cml_weex_content);
         objectView = viewContainer;
-        titleView.showLeftBackDrawable(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+//        titleView.showLeftBackDrawable(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                onBackPressed();
+//            }
+//        });
 
         refreshView = findViewById(R.id.refresh_btn);
         refreshView.setOnClickListener(new View.OnClickListener() {
