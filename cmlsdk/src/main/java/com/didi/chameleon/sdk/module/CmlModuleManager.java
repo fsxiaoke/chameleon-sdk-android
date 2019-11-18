@@ -3,6 +3,7 @@ package com.didi.chameleon.sdk.module;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.didi.chameleon.sdk.CmlEnvironment;
 import com.didi.chameleon.sdk.CmlInstanceManage;
 import com.didi.chameleon.sdk.bridge.CmlBridgeManager;
 import com.didi.chameleon.sdk.bridge.ICmlBridgeJsToNative;
@@ -67,7 +68,11 @@ public class CmlModuleManager {
 
     public void invokeNative(@NonNull String instanceId, @NonNull String moduleName, @NonNull String methodName,
                              @Nullable String params, @Nullable String callbackId) {
-        CmlLogUtil.d(TAG, "invokeNative: " + instanceId + " " + moduleName + " " + methodName + " " + callbackId + " " + params);
+        if (CmlEnvironment.DEBUG) {
+            CmlLogUtil.d(TAG,
+                    "invokeNative: " + instanceId + " " + moduleName + " " + methodName + " "
+                            + callbackId + " " + params);
+        }
         try {
             invoke.invokeNative(instanceId, moduleName, methodName, params, callbackId);
         } catch (CmlModuleException e) {
@@ -78,7 +83,9 @@ public class CmlModuleManager {
     }
 
     public void callbackNative(@NonNull String instanceId, @NonNull String callbackId, @Nullable String params) {
-        CmlLogUtil.d(TAG, "callbackNative: " + instanceId + " " + callbackId + " " + params);
+        if (CmlEnvironment.DEBUG) {
+            CmlLogUtil.d(TAG, "callbackNative: " + instanceId + " " + callbackId + " " + params);
+        }
         invoke.callbackNative(instanceId, callbackId, params);
     }
 
@@ -89,7 +96,10 @@ public class CmlModuleManager {
             callbackId = store.stashCallback(instanceId, callback);
         }
         String paramStr = invoke.wrapperParam(params);
-        CmlLogUtil.d(TAG, "invokeWeb: " + instanceId + " " + moduleName + " " + methodName + " " + callbackId + " " + paramStr);
+        if (CmlEnvironment.DEBUG) {
+            CmlLogUtil.d(TAG, "invokeWeb: " + instanceId + " " + moduleName + " " + methodName + " "
+                    + callbackId + " " + paramStr);
+        }
         CmlBridgeManager.getInstance().invokeJsMethod(instanceId, moduleName, methodName, paramStr, callbackId);
     }
 
@@ -100,7 +110,9 @@ public class CmlModuleManager {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        CmlLogUtil.d(TAG, "callbackWeb: " + instanceId + " " + callbackId + " " + paramStr);
+        if (CmlEnvironment.DEBUG) {
+            CmlLogUtil.d(TAG, "callbackWeb: " + instanceId + " " + callbackId + " " + paramStr);
+        }
         CmlBridgeManager.getInstance().callbackToJs(instanceId, paramStr, callbackId);
     }
 
