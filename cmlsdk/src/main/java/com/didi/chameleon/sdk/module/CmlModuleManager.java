@@ -68,7 +68,11 @@ public class CmlModuleManager {
 
     public void invokeNative(@NonNull String instanceId, @NonNull String moduleName, @NonNull String methodName,
                              @Nullable String params, @Nullable String callbackId) {
-        CmlLogUtil.d(TAG, "invokeNative: " + instanceId + " " + moduleName + " " + methodName + " " + callbackId + " " + params);
+        if (CmlEnvironment.DEBUG) {
+            CmlLogUtil.d(TAG,
+                    "invokeNative: " + instanceId + " " + moduleName + " " + methodName + " "
+                            + callbackId + " " + params);
+        }
         try {
             invoke.invokeNative(instanceId, moduleName, methodName, params, callbackId);
         } catch (CmlModuleException e) {
