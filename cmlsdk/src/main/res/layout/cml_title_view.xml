@@ -43,7 +43,7 @@
         android:layout_alignParentRight="true"
         android:gravity="center_vertical"
         android:paddingLeft="10dp"
-        android:textColor="ff545861"
+        android:textColor="#ff545861"
         android:textSize="14sp"
         android:visibility="gone" />
 
