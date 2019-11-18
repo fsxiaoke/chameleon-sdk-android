@@ -4,7 +4,7 @@
     android:id="@+id/title_bar_layout_above"
     android:layout_width="fill_parent"
     android:layout_height="48dp"
-    android:background="#3C394B"
+    android:background="#F2f3F5"
     android:clickable="true">
 
     <LinearLayout
@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:textColor="@color/cml_333333"
+            android:textColor="#ff545861"
             android:textSize="15sp"
             android:visibility="gone"
             tools:text="返回"
@@ -43,7 +43,7 @@
         android:layout_alignParentRight="true"
         android:gravity="center_vertical"
         android:paddingLeft="10dp"
-        android:textColor="@color/cml_666666"
+        android:textColor="ff545861"
         android:textSize="14sp"
         android:visibility="gone" />
 
@@ -53,7 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:singleLine="true"
-        android:textColor="#666666"
+        android:textColor="#ff545861"
         android:textSize="18sp"
         android:visibility="gone" />
 
