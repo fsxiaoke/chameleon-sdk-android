@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -146,6 +147,10 @@ public class CmlWeexInstance implements ICmlActivityInstance, ICmlBaseLifecycle,
      * @param extendsParam 需要传入给js 的参数
      */
     public void renderByUrl(@NonNull final String url, final HashMap<String, Object> extendsParam) {
+
+        Log.e("weex: [WXBridgeManager]", "CmlWeexInstance >>>> renderByUrl:" + url);
+
+
         mTotalUrl = url;
         mWXUrl = Util.parseCmlUrl(url);
         this.extendsParam = extendsParam;
@@ -174,6 +179,7 @@ public class CmlWeexInstance implements ICmlActivityInstance, ICmlBaseLifecycle,
                     //适配weex的自定内容
                     options.put("bundleUrl", mWXUrl);
 
+                    Log.e("weex: [WXBridgeManager]", "CmlWeexInstance >>>> performGetCode onSuccess:");
                     render(template, options);
                 }
             }
