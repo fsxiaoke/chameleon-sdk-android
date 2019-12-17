@@ -181,6 +181,7 @@ public class CmlWeexInstance implements ICmlActivityInstance, ICmlBaseLifecycle,
 
                     Log.e("weex: [WXBridgeManager]", "CmlWeexInstance >>>> performGetCode onSuccess:");
                     render(template, options);
+                    
                 }
             }
 
