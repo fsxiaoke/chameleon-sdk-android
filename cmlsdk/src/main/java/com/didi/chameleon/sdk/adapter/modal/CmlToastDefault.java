@@ -9,7 +9,6 @@ import com.didi.chameleon.sdk.utils.CmlLogUtil;
 
 public class CmlToastDefault implements CmlToastAdapter {
 
-    private Toast toast;
 
     @Override
     public void showToast(Context context, String message, int duration) {
@@ -17,7 +16,7 @@ public class CmlToastDefault implements CmlToastAdapter {
             CmlLogUtil.e("", "[WXModalUIModule] toast param parse is null ");
             return;
         }
-
+        Toast toast = null;
         if (duration > 3 * 1000) {
             duration = Toast.LENGTH_LONG;
         } else {
