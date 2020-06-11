@@ -476,6 +476,10 @@ public class CmlWeexInstance implements ICmlActivityInstance, ICmlBaseLifecycle,
         }
     }
 
+    public WXSDKInstance getWeexInstance(){
+        return mWeexInstance;
+    }
+
     /**
 
      * @since 18/7/30
