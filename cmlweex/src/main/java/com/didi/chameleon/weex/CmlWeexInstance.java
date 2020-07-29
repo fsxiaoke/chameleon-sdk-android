@@ -291,7 +291,7 @@ public class CmlWeexInstance implements ICmlActivityInstance, ICmlBaseLifecycle,
 
     @Override
     public void onException(WXSDKInstance instance, String errCode, String msg) {
-        CmlLogUtil.e(TAG, "onException msg = " + msg);
+//        CmlLogUtil.e(TAG, "onException msg = " + msg);
         if (mInstanceListener!=null){
             mInstanceListener.onException(mTotalUrl,errCode,msg);
         }
@@ -345,6 +345,7 @@ public class CmlWeexInstance implements ICmlActivityInstance, ICmlBaseLifecycle,
      * @param errorMsg 错误信息
      */
     private void reportError(int type, String errorMsg) {
+        CmlLogUtil.e(TAG, "cml_weex_container_exception: type="+type + ",  " + errorMsg);
         if (CmlEnvironment.CML_OUTPUT_STATISTICS && CmlEnvironment.getStatisticsAdapter() != null) {
             HashMap<String, Object> map = new HashMap<>();
             map.put("type", type);
@@ -481,6 +482,10 @@ public class CmlWeexInstance implements ICmlActivityInstance, ICmlBaseLifecycle,
         void setCmlInstance(CmlWeexInstance cmlInstance) {
             this.cmlInstance = cmlInstance;
         }
+    }
+
+    public WXSDKInstance getWeexInstance(){
+        return mWeexInstance;
     }
 
     /**
