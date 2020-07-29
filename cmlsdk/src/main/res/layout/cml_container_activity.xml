@@ -40,4 +40,49 @@
         android:padding="5dp"
         android:background="@drawable/cml_refresh_selector"
         android:layout_marginEnd="30dp" />
+
+    <LinearLayout
+        android:id="@+id/reload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:padding="5dp"
+        android:visibility="gone"
+        android:orientation="vertical"
+    >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/error"
+            android:padding="5dp"
+            android:background="@drawable/cml_refresh_selector"
+             />
+        
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="加载失败，请检查网络"
+            android:layout_marginTop="15dp"
+            android:textColor="#545861"
+            android:gravity="center_horizontal"></TextView>
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="重新加载"
+            android:layout_marginTop="10dp"
+            android:textColor="#4781FF"
+            android:gravity="center_horizontal"
+            ></TextView>
+
+        
+    </LinearLayout>
+
+    
+
+
+
+
 </RelativeLayout>

@@ -49,6 +49,7 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
     private CmlTitleView titleView;
     private View objectView;
     private ViewGroup viewContainer;
+    private ViewGroup reload;
     private View refreshView;
     /*
      * 判断view是否有效，我们认为View在onCreate~onDestroy之间为有效
@@ -76,6 +77,7 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
         titleView = findViewById(R.id.cml_weex_title_bar);
         loadingView = findViewById(R.id.cml_weex_loading_layout);
         viewContainer = findViewById(R.id.cml_weex_content);
+        reload = findViewById(R.id.reload);
         objectView = viewContainer;
 //        titleView.showLeftBackDrawable(new View.OnClickListener() {
 //            @Override
@@ -102,6 +104,22 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
 
             }
         });
+
+
+        reload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = getIntent();
+                String url = intent.getStringExtra(PARAM_URL);
+                if (TextUtils.isEmpty(url)) {
+                    CmlLogUtil.e(TAG, "url cant be null !");
+                    return;
+                }
+
+                reload.setVisibility(View.GONE);
+                mWXInstance.reload(url);
+            }
+        });
     }
 
     protected  View getRefreshView(){
@@ -111,6 +129,7 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
     @Override
     protected void renderByUrl() {
         setLoadingMsg(getString(R.string.cml_loading_msg));
+
         Intent intent = getIntent();
         String url = intent.getStringExtra(PARAM_URL);
         if (TextUtils.isEmpty(url)) {
@@ -143,6 +162,7 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
     public void onRenderSuccess() {
 //        loadingView.setVisibility(View.GONE);
 //        titleView.setVisibility(View.GONE);
+        reload.setVisibility(View.GONE);
     }
 
 
@@ -188,6 +208,8 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
     @Override
     public void onException(String url, String errCode, String msg) {
         loadingView.setVisibility(View.GONE);
+        reload.setVisibility(View.VISIBLE);
+
     }
 
     @Override
