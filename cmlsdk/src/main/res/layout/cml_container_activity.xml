@@ -11,6 +11,7 @@
         android:id="@+id/cml_weex_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="invisible"
          />
 
     <com.didi.chameleon.sdk.widget.CmlTitleView
@@ -47,7 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:padding="5dp"
-        android:visibility="gone"
+        android:visibility="visible"
         android:orientation="vertical"
     >
         <ImageView
