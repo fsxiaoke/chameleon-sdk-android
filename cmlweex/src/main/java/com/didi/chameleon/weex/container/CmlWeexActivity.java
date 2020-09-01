@@ -126,6 +126,11 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
         return refreshView;
     }
 
+    private boolean mForceUpdate = false;
+    public void setForceUpdate(boolean update){
+        mForceUpdate = update;
+    }
+
     @Override
     protected void renderByUrl() {
         setLoadingMsg(getString(R.string.cml_loading_msg));
@@ -138,6 +143,7 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
         }
         if (mWXInstance != null) {
             options = (HashMap<String, Object>) intent.getSerializableExtra(PARAM_OPTIONS);
+            options.put("forceupdate", mForceUpdate);
             mWXInstance.renderByUrl(url, options);
         }
     }
