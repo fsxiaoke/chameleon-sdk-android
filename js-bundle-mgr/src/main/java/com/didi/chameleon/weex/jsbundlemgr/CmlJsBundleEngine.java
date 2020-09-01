@@ -98,7 +98,7 @@ public class CmlJsBundleEngine implements CmlJsBundleManager {
      * @param cmlGetCodeStringCallback 获取code的回调
      */
     @Override
-    public void getWXTemplate(String cmladdr, CmlGetCodeStringCallback cmlGetCodeStringCallback) {
+    public void getWXTemplate(String cmladdr, boolean forceupdate, CmlGetCodeStringCallback cmlGetCodeStringCallback) {
         if (!isInit) {
             CmlLogUtils.e(TAG, "请先初始化CmlJsBundleEngine");
             return;
@@ -108,7 +108,7 @@ public class CmlJsBundleEngine implements CmlJsBundleManager {
             CmlCodeManager.getInstance().getCode(cmladdr, cmlGetCodeStringCallback);
         }else {
             if(fsBundleManager != null){
-                fsBundleManager.getWXTemplate(cmladdr, cmlGetCodeStringCallback);
+                fsBundleManager.getWXTemplate(cmladdr,forceupdate, cmlGetCodeStringCallback);
             }
         }
 
