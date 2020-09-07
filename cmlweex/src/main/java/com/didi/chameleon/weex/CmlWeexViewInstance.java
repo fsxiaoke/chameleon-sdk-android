@@ -129,7 +129,9 @@ public class CmlWeexViewInstance implements ICmlViewInstance, IWXRenderListener 
             return;
         }
         mWeexInstance.addUserTrackParameter(CmlConstant.WEEX_INSTANCE_URL, mTotalUrl);
-        CmlWeexEngine.getInstance().performGetCode(mCmlUrl, (boolean)extendsParam.get("forceupdate"), new CmlGetCodeStringCallback() {
+
+
+        CmlWeexEngine.getInstance().performGetCode(mCmlUrl, false, new CmlGetCodeStringCallback() {
             @Override
             public void onSuccess(String template) {
                 // 代码为空weex不会报错，需要主动降级
