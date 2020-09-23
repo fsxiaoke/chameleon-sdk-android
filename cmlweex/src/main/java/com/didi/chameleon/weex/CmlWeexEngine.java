@@ -141,12 +141,12 @@ public class CmlWeexEngine implements ICmlEngine {
     /**
      * 开始获取代码
      */
-    void performGetCode(String url, CmlGetCodeStringCallback callback) {
+    void performGetCode(String url, boolean forceupdate, CmlGetCodeStringCallback callback) {
         if (null == cmlJsBundleManager) {
             CmlLogUtil.e(TAG, "performPreload failed, CmlJsBundleManager is null.");
             return;
         }
-        cmlJsBundleManager.getWXTemplate(url, callback);
+        cmlJsBundleManager.getWXTemplate(url,forceupdate, callback);
     }
 
 

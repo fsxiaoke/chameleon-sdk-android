@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -146,6 +147,10 @@ public class CmlWeexInstance implements ICmlActivityInstance, ICmlBaseLifecycle,
      * @param extendsParam 需要传入给js 的参数
      */
     public void renderByUrl(@NonNull final String url, final HashMap<String, Object> extendsParam) {
+
+        Log.e("weex: [WXBridgeManager]", "CmlWeexInstance >>>> renderByUrl:" + url);
+
+
         mTotalUrl = url;
         mWXUrl = Util.parseCmlUrl(url);
         this.extendsParam = extendsParam;
@@ -154,7 +159,13 @@ public class CmlWeexInstance implements ICmlActivityInstance, ICmlBaseLifecycle,
             return;
         }
         mWeexInstance.addUserTrackParameter(CmlConstant.WEEX_INSTANCE_URL, mTotalUrl);
-        CmlWeexEngine.getInstance().performGetCode(mWXUrl, new CmlGetCodeStringCallback() {
+
+        boolean forceUpdate = false;
+        if(extendsParam.get("forceupdate") != null){
+            forceUpdate = (Boolean)extendsParam.get("forceupdate");
+        }
+
+        CmlWeexEngine.getInstance().performGetCode(mWXUrl, forceUpdate, new CmlGetCodeStringCallback() {
             @Override
             public void onSuccess(String template) {
                 // 代码为空weex不会报错，需要主动降级
@@ -174,7 +185,9 @@ public class CmlWeexInstance implements ICmlActivityInstance, ICmlBaseLifecycle,
                     //适配weex的自定内容
                     options.put("bundleUrl", mWXUrl);
 
+                    Log.e("weex: [WXBridgeManager]", "CmlWeexInstance >>>> performGetCode onSuccess:");
                     render(template, options);
+                    
                 }
             }
 

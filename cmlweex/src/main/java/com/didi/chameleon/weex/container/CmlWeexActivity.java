@@ -49,6 +49,7 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
     private CmlTitleView titleView;
     private View objectView;
     private ViewGroup viewContainer;
+    private ViewGroup reload;
     private View refreshView;
     /*
      * 判断view是否有效，我们认为View在onCreate~onDestroy之间为有效
@@ -76,6 +77,7 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
         titleView = findViewById(R.id.cml_weex_title_bar);
         loadingView = findViewById(R.id.cml_weex_loading_layout);
         viewContainer = findViewById(R.id.cml_weex_content);
+        reload = findViewById(R.id.reload);
         objectView = viewContainer;
 //        titleView.showLeftBackDrawable(new View.OnClickListener() {
 //            @Override
@@ -102,15 +104,38 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
 
             }
         });
+
+
+        reload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = getIntent();
+                String url = intent.getStringExtra(PARAM_URL);
+                if (TextUtils.isEmpty(url)) {
+                    CmlLogUtil.e(TAG, "url cant be null !");
+                    return;
+                }
+
+                reload.setVisibility(View.GONE);
+                loadingView.setVisibility(View.VISIBLE);
+                mWXInstance.reload(url);
+            }
+        });
     }
 
     protected  View getRefreshView(){
         return refreshView;
     }
 
+    private boolean mForceUpdate = false;
+    public void setForceUpdate(boolean update){
+        mForceUpdate = update;
+    }
+
     @Override
     protected void renderByUrl() {
         setLoadingMsg(getString(R.string.cml_loading_msg));
+
         Intent intent = getIntent();
         String url = intent.getStringExtra(PARAM_URL);
         if (TextUtils.isEmpty(url)) {
@@ -119,6 +144,7 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
         }
         if (mWXInstance != null) {
             options = (HashMap<String, Object>) intent.getSerializableExtra(PARAM_OPTIONS);
+            options.put("forceupdate", mForceUpdate);
             mWXInstance.renderByUrl(url, options);
         }
     }
@@ -143,6 +169,7 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
     public void onRenderSuccess() {
 //        loadingView.setVisibility(View.GONE);
 //        titleView.setVisibility(View.GONE);
+        reload.setVisibility(View.GONE);
     }
 
 
@@ -188,6 +215,8 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
     @Override
     public void onException(String url, String errCode, String msg) {
         loadingView.setVisibility(View.GONE);
+        reload.setVisibility(View.VISIBLE);
+
     }
 
     @Override
@@ -203,12 +232,8 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
                 }
 
                 loadingView.setVisibility(View.GONE);
+                reload.setVisibility(View.VISIBLE);
 
-                if(isDevPackage()){
-                    if(degradeCode == 4){
-                        showDialog("Bundle下载失败，请检查环境和配置");
-                    }
-                }
             }
         });
 
@@ -238,6 +263,7 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
         objectView = view;
         viewContainer.addView(view);
         loadingView.setVisibility(View.GONE);
+        refreshView.setVisibility(View.GONE);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
