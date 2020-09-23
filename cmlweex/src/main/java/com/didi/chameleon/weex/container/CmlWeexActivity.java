@@ -231,12 +231,15 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
                 }
 
                 loadingView.setVisibility(View.GONE);
-
-                if(isDevPackage()){
-                    if(degradeCode == 4){
-                        showDialog("Bundle下载失败，请检查环境和配置");
-                    }
-                }
+                refreshView.setVisibility(View.VISIBLE);
+//
+//                if(isDevPackage()){
+//                    if(degradeCode == 4){
+//                        showDialog("Bundle下载失败，请检查环境和配置");
+//                    }
+//                }else{
+//                    refreshView.setVisibility(View.VISIBLE);
+//                }
             }
         });
 
@@ -266,6 +269,7 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
         objectView = view;
         viewContainer.addView(view);
         loadingView.setVisibility(View.GONE);
+        refreshView.setVisibility(View.GONE);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
