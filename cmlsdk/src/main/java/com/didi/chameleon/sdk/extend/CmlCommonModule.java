@@ -69,16 +69,26 @@ public class CmlCommonModule {
         JSONObject object = new JSONObject();
         JSONObject extObject = new JSONObject();
         try {
+            int deviceWidth =CmlViewUtil.getScreenWidth(context);
+            int deviceHeight =CmlViewUtil.getDeviceHeight(context);
+            int statusbarHeight =CmlViewUtil.getStatusBarHeight(context);
+            int navigationHeight = CmlViewUtil.getNavBarHeight(context);
             object.put("scale", CmlViewUtil.getDensity(context));
-            object.put("deviceWidth", CmlViewUtil.getScreenWidth(context));
-            object.put("deviceHeight", CmlViewUtil.getDeviceHeight(context));
+            object.put("deviceWidth", deviceWidth);
+            object.put("deviceHeight", deviceHeight);
             object.put("os", "android");
             extObject.put("model", CmlSystemUtil.getModel());
             extObject.put("imei", CmlSystemUtil.getIMEI(context));
             extObject.put("netType", CmlSystemUtil.getNetworkType(context));
-            extObject.put("statusbarHeight", CmlViewUtil.getStatusBarHeight(context));
-            extObject.put("navigationHeight", CmlViewUtil.getNavBarHeight(context));
-            extObject.put("viewHeight", instance.getObjectView() == null ? 0 : instance.getObjectView().getHeight());
+            extObject.put("statusbarHeight", statusbarHeight);
+            extObject.put("navigationHeight", navigationHeight);
+            int viewHeight = instance.getObjectView() == null ? 0 : instance.getObjectView().getHeight();
+            if(viewHeight == 0){
+                float ratio = 750f /  deviceWidth;
+                viewHeight = (int) ((deviceHeight-statusbarHeight-navigationHeight)* ratio);
+            }
+
+            extObject.put("viewHeight", viewHeight);
             object.put("extraParams", extObject);
         } catch (JSONException e) {
             e.printStackTrace();
