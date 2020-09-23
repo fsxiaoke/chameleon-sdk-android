@@ -85,14 +85,13 @@ public class CmlCommonModule {
             extObject.put("navigationHeight", navigationHeight);
             int viewHeight = instance.getObjectView() == null ? 0 : instance.getObjectView().getHeight();
             if(viewHeight == 0){
-                float ratio = 750f /  deviceWidth;
                 int menuHeight = 0;
                Context ctx =  instance.getContext();
                if(ctx instanceof ICmlMenu){
                    ICmlMenu menu = (ICmlMenu) ctx;
                    menuHeight = menu.getMenuHeight();
                }
-                viewHeight = (int) ((deviceHeight-statusbarHeight-navigationHeight-menuHeight)* ratio);
+                viewHeight = deviceHeight-statusbarHeight-navigationHeight-menuHeight;
             }
 
             extObject.put("viewHeight", viewHeight);
