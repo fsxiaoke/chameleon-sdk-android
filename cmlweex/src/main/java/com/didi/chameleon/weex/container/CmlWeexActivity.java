@@ -117,6 +117,7 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
                 }
 
                 reload.setVisibility(View.GONE);
+                loadingView.setVisibility(View.VISIBLE);
                 mWXInstance.reload(url);
             }
         });
