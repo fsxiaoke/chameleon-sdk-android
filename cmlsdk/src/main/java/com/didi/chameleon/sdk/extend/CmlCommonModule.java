@@ -9,6 +9,7 @@ import com.didi.chameleon.sdk.CmlEngine;
 import com.didi.chameleon.sdk.CmlEnvironment;
 import com.didi.chameleon.sdk.ICmlActivityInstance;
 import com.didi.chameleon.sdk.ICmlInstance;
+import com.didi.chameleon.sdk.ICmlMenu;
 import com.didi.chameleon.sdk.utils.CmlSystemUtil;
 import com.didi.chameleon.sdk.module.CmlCallback;
 import com.didi.chameleon.sdk.module.CmlCallbackSimple;
@@ -85,7 +86,13 @@ public class CmlCommonModule {
             int viewHeight = instance.getObjectView() == null ? 0 : instance.getObjectView().getHeight();
             if(viewHeight == 0){
                 float ratio = 750f /  deviceWidth;
-                viewHeight = (int) ((deviceHeight-statusbarHeight-navigationHeight)* ratio);
+                int menuHeight = 0;
+               Context ctx =  instance.getContext();
+               if(ctx instanceof ICmlMenu){
+                   ICmlMenu menu = (ICmlMenu) ctx;
+                   menuHeight = menu.getMenuHeight();
+               }
+                viewHeight = (int) ((deviceHeight-statusbarHeight-navigationHeight-menuHeight)* ratio);
             }
 
             extObject.put("viewHeight", viewHeight);
