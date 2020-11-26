@@ -181,6 +181,7 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
         }
     }
 
+
     @Override
     protected void onPause() {
         super.onPause();
