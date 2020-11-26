@@ -218,19 +218,27 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
     @Override
     public void onException(String url, String errCode, String msg) {
         loadingView.setVisibility(View.GONE);
-        reload.setVisibility(View.VISIBLE);
-        if(CmlEnvironment.getLoggerAdapter() != null){
-            CmlEnvironment.getLoggerAdapter().e("bundlemanager", "cmlweexactivity url: " + url + " errcode: " + errCode + " msg: " + msg);
+//        reload.setVisibility(View.VISIBLE);
+        try{
+            if(CmlEnvironment.getLoggerAdapter() != null){
+                CmlEnvironment.getLoggerAdapter().e("bundlemanager", "cmlweexactivity url: " + url + " errcode: " + errCode + " msg: " + msg);
+            }
+        }catch (Exception e){
+
         }
+
     }
 
     @Override
     public void onDegradeToH5(final String url, final int degradeCode) {
+        try{
+            if(CmlEnvironment.getLoggerAdapter() != null){
+                CmlEnvironment.getLoggerAdapter().e("bundlemanager", "cmlweexactivity  url: " + url + " degradeCode: " + degradeCode);
+            }
 
-        if(CmlEnvironment.getLoggerAdapter() != null){
-            CmlEnvironment.getLoggerAdapter().e("bundlemanager", "cmlweexactivity  url: " + url + " degradeCode: " + degradeCode);
+        }catch (Exception e){
+
         }
-
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
