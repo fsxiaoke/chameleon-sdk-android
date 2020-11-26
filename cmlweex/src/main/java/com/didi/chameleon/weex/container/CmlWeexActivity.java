@@ -212,15 +212,23 @@ public class CmlWeexActivity extends CmlContainerActivity implements CmlWeexInst
         return true;
     }
 
+
+
     @Override
     public void onException(String url, String errCode, String msg) {
         loadingView.setVisibility(View.GONE);
         reload.setVisibility(View.VISIBLE);
-
+        if(CmlEnvironment.getLoggerAdapter() != null){
+            CmlEnvironment.getLoggerAdapter().e("bundlemanager", "cmlweexactivity url: " + url + " errcode: " + errCode + " msg: " + msg);
+        }
     }
 
     @Override
     public void onDegradeToH5(final String url, final int degradeCode) {
+
+        if(CmlEnvironment.getLoggerAdapter() != null){
+            CmlEnvironment.getLoggerAdapter().e("bundlemanager", "cmlweexactivity  url: " + url + " degradeCode: " + degradeCode);
+        }
 
         runOnUiThread(new Runnable() {
             @Override
