@@ -140,20 +140,20 @@ public class CmlStreamHttp {
 
     private void extractHeaders(JSONObject headers, CmlOptions.Builder builder) {
         //set user-agent
-        String UA = "cml admin";
+//        String UA = "cml admin";
         if (headers != null) {
             Iterator<String> iterator = headers.keys();
             String key;
             while (iterator.hasNext()) {
                 key = iterator.next();
-                if (key.equals("user-agent")) {
-                    UA = headers.optString(key);
-                    continue;
-                }
+//                if (key.equals("user-agent")) {
+//                    UA = headers.optString(key);
+//                    continue;
+//                }
                 builder.putHeader(key, headers.optString(key));
             }
         }
-        builder.putHeader("user-agent", UA);
+//        builder.putHeader("user-agent", UA);
     }
 
 
