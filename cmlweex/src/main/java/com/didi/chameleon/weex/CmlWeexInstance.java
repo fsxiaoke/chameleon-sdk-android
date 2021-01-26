@@ -29,6 +29,7 @@ import com.taobao.weex.IWXRenderListener;
 import com.taobao.weex.WXSDKInstance;
 import com.taobao.weex.common.WXRenderStrategy;
 
+import java.security.spec.ECField;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -288,6 +289,14 @@ public class CmlWeexInstance implements ICmlActivityInstance, ICmlBaseLifecycle,
         if (mInstanceListener != null) {
             mInstanceListener.onRenderSuccess();
         }
+        try{
+            if(CmlEnvironment.getLoggerAdapter() != null){
+                CmlEnvironment.getLoggerAdapter().e("bundlemanager", "cmlweexInstance, onRenderSuccess" + this.mTotalUrl);
+            }
+        }catch (Exception e){
+
+        }
+
     }
 
     @Override
@@ -298,6 +307,16 @@ public class CmlWeexInstance implements ICmlActivityInstance, ICmlBaseLifecycle,
     @Override
     public void onException(WXSDKInstance instance, String errCode, String msg) {
 //        CmlLogUtil.e(TAG, "onException msg = " + msg);
+        try{
+            if(CmlEnvironment.getLoggerAdapter() != null){
+                CmlEnvironment.getLoggerAdapter().e("bundlemanager",
+                        "cmlweexInstance, onException" + " errCode: " + errCode +
+                                " msg: " + msg);
+            }
+        }catch (Exception e) {
+
+        }
+
         if (mInstanceListener!=null){
             mInstanceListener.onException(mTotalUrl,errCode,msg);
         }
